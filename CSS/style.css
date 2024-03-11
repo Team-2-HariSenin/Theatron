@@ -42,6 +42,10 @@ body {
   z-index: 100;
 }
 
+.header.sticky {
+  border-bottom: 0.1rem solid rgba(0, 0, 0, 0.2);
+}
+
 .logo {
   font-size: 2.5rem;
   color: var(--text-color);
@@ -50,15 +54,22 @@ body {
 }
 
 .navbar a {
-  font-size: 1.4rem;
+  font-size: 1.7rem;
   color: var(--text-color);
   margin-left: 4rem;
-  padding-left: 3rem;
   transition: 0.3s;
 }
 
-.navbar a:hover {
+.navbar a:hover,
+.navbar a.active {
   color: #0ef;
+}
+
+#menu-icon,
+#search-icon {
+  font-size: 3.6rem;
+  color: var(--text-color);
+  display: none;
 }
 
 .btn {
@@ -77,6 +88,7 @@ body {
 input[type="text"] {
   padding: 5px;
   width: 300px;
+  border-radius: 2rem;
 }
 
 input[type="submit"] {
@@ -85,5 +97,59 @@ input[type="submit"] {
   color: white;
   border: none;
   cursor: pointer;
+  border-radius: 2rem;
+  transition: 0.3s;
+}
+
+input[type="submit"]:hover {
+  color: var(--main-color);
 }
 /* Header Start End */
+
+/* BREAKPOINTS */
+
+@media (max-width: 1200px) {
+  html {
+    font-size: 55%;
+  }
+}
+
+@media (max-width: 991px) {
+  .header {
+    padding: 2rem 3rem;
+  }
+
+  section {
+    padding: 10rem 3% 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  #menu-icon,
+  #search-icon {
+    display: block;
+  }
+
+  .navbar {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    padding: 1rem 3%;
+    background: var(--bg-color);
+    border-top: 0.1rem solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0.5rem 1rem rgba(0, 0, 0, 0.2);
+    display: none;
+  }
+
+  .navbar.active {
+    display: block;
+  }
+
+  .navbar a {
+    display: block;
+    font-size: 2rem;
+    margin: 3rem 0;
+  }
+
+}
