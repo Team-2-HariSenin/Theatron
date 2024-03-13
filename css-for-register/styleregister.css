@@ -1,0 +1,84 @@
+main {
+    width: 100vw;
+}
+
+/* Form Register */
+.form-for-register {
+    width: 38%;
+    margin: 2rem auto;
+    padding: 3rem;
+    display: flex;
+    gap: 3rem;
+    flex-direction: column;
+    background-color: #fff;
+    border-radius: 24px;
+}
+
+.form-title {
+    color: #000;
+    font-weight: bold;
+    font-size: 2rem;
+    margin: 0 auto;
+}
+
+.container-input {
+    color: #000;
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.container-input div {
+    border-bottom: #000 solid 1px;
+}
+
+.input-register {
+    width: 100%;
+    line-height: 2rem;
+    font-size: 1.5rem;
+    font-weight: normal;
+}
+
+.form-btn {
+    display: flex;
+    flex-direction: column;
+}
+
+.btn-register {
+    padding: 1.5rem;
+    background-color: #5B50E1;
+    border-radius: 24px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+.space {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.space .or {
+    color: #000;
+    font-size: 1.5rem;
+    margin: 2rem auto;
+}
+
+.space .small-line {
+    width: 40%;
+    height: 1px;
+    background-color: #000;
+}
+
+.form-btn a {
+    padding: 1.5rem;
+    text-align: center;
+    background-color: #EFD700;
+    border-radius: 24px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.5rem;
+}
