@@ -1,0 +1,6 @@
+#description {
+    max-width: 300px; /* Sesuaikan dengan lebar maksimal yang diinginkan */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
