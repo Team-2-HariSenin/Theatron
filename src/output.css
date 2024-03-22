@@ -1454,3 +1454,77 @@ body {
     color: rgb(255 255 255 / var(--tw-text-opacity));
   }
 }
+
+.container-login {
+  height: 775px;
+  margin-top: 80px;
+  background-color:black;
+}
+.w-530 {
+  width: 530px;
+}
+.h-715 {
+  height: 715px;
+}
+.bg-white-login {
+  background-color: white;
+}
+.text-login {
+  font-size: 32px;
+
+}
+.pl-50 {
+  padding-left: 50px;
+}
+
+.mt-70 {
+  margin-top: 70px;
+}
+.bg-purple-login {
+  background-color: #5B50E1;
+}
+.bg-yellow-login {
+  background-color: #EFD700;
+}
+.text-30 {
+  font-size: 30px ;
+}
+.pl-80 {
+  padding-left: 80px;
+}
+.mr-50 {
+  margin-right: 50px;
+}
+.mt-8 {
+  margin-top: 8px;
+}
+.mt-100{
+  margin-top: 100px;
+}
+.h-50 {
+  height: 50px;
+}
+.w-400 {
+  width: 400px;
+}
+.w-350 {
+  width: 350px;
+}
+.rounded-3 {
+  border-radius: 3rem;
+}
+
+.w-75 {
+  width: 75%;
+}
+.text-20 {
+  font-size: 20px;
+}
+.outline-none {
+  outline: transparent ;
+}
+
+.border-b {
+  border-bottom:1px solid black;
+}
+
