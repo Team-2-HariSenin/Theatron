@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Theatron Admin</title>
+    <link rel="stylesheet" href="/src/output.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="bg-black text-white">
+      <h1 class="p-6 text-2xl">Theatron Dashboard</h1>
+    </header>
+    <main class="xl:flex">
+      <nav class="w-full bg-slate-800 p-6 text-white xl:min-h-screen xl:w-64">
+        <ul>
+          <li class="md:text-md mb-5 text-sm lg:text-lg xl:text-lg">
+            <a href="manageuser.html">Manage User</a>
+          </li>
+          <li class="md:text-md mb-5 text-sm lg:text-lg xl:text-lg">
+            <a href="managemovie.html">Manage Movie</a>
+          </li>
+        </ul>
+      </nav>
+      <section class="p-6">
+        <h2 class="mb-4 text-2xl font-bold">Genre Horror</h2>
+        <button class="mb-4 rounded-lg bg-yellow-300 p-3 hover:bg-yellow-400">
+          Create New Movie
+        </button>
+        <table class="w-screen max-w-screen-xl table-auto border-collapse">
+          <thead>
+            <tr>
+              <th class="bg-gray-200 px-4 py-2 text-center text-sm">
+                Movie Name
+              </th>
+              <th class="w-1/4 bg-gray-200 px-4 py-2 text-center text-sm">
+                Description
+              </th>
+              <th class="bg-gray-200 px-4 py-2 text-center text-sm">
+                Director
+              </th>
+              <th class="bg-gray-200 px-4 py-2 text-center text-sm">Writer</th>
+              <th class="bg-gray-200 px-4 py-2 text-center text-sm">Star</th>
+              <th class="bg-gray-200 px-4 py-2 text-center text-sm">Rating</th>
+              <th class="bg-gray-200 px-4 py-2 text-center text-sm">
+                Created On
+              </th>
+              <th class="bg-gray-200 px-4 py-2 text-center text-sm">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border px-4 py-2 text-center text-sm">Conjuring</td>
+              <td class="border px-4 py-2 text-center text-sm">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                Provident quia laboriosam eaque, inventore minima aspernatur
+              </td>
+              <td class="border px-4 py-2 text-center text-sm">Someone Dad</td>
+              <td class="border px-4 py-2 text-center text-sm">Someone Mom</td>
+              <td class="border px-4 py-2 text-center text-sm">Someone Kids</td>
+              <td class="border px-4 py-2 text-center text-sm">8.0</td>
+              <td class="border px-4 py-2 text-center text-sm">
+                2023-03-22 00:10:53
+              </td>
+              <td class="border px-4 py-2 text-center align-middle text-sm">
+                <button
+                  class="rounded bg-green-500 px-4 py-2 font-bold text-white hover:bg-green-600"
+                >
+                  Manage
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </body>
+</html>
