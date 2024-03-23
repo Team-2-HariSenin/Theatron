@@ -1527,4 +1527,9 @@ body {
 .border-b {
   border-bottom:1px solid black;
 }
+.hr-or {
+  width: 40%;
+  margin-top: auto;
+  margin-bottom: auto;
+}
 
