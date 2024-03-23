@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Theatron Admin</title>
+    <link rel="stylesheet" href="/src/output.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="bg-black text-white">
+      <h1 class="p-6 text-2xl">Theatron Dashboard</h1>
+    </header>
+    <main class="xl:flex">
+      <nav class="w-full bg-slate-800 p-6 text-white xl:min-h-screen xl:w-64">
+        <ul>
+          <li class="md:text-md mb-5 text-sm lg:text-lg xl:text-lg">
+            <a href="manageuser.html">Manage User</a>
+          </li>
+          <li class="md:text-md mb-5 text-sm lg:text-lg xl:text-lg">
+            <a href="managemovie.html">Manage Movie</a>
+          </li>
+        </ul>
+      </nav>
+      <section class="p-6">
+        <h2 class="mb-4 text-2xl font-bold">Manage Movies</h2>
+        <button class="mb-4 rounded-lg bg-yellow-300 p-3 hover:bg-yellow-400">
+          Create New Genre
+        </button>
+        <table class="w-screen max-w-screen-xl table-auto border-collapse">
+          <thead>
+            <tr>
+              <th class="bg-gray-200 px-4 py-2 text-center text-sm">Genre</th>
+              <th class="bg-gray-200 px-4 py-2 text-center text-sm">
+                Movie Count
+              </th>
+              <th class="bg-gray-200 px-4 py-2 text-center text-sm">Status</th>
+              <th class="bg-gray-200 px-4 py-2 text-center text-sm">Manage</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border px-4 py-2 text-center align-middle text-sm">
+                <a href="managemoviedetail.html">
+                  <button
+                    class="rounded bg-yellow-300 px-4 py-2 font-bold hover:bg-yellow-400"
+                  >
+                    Horror
+                  </button>
+                </a>
+              </td>
+              <td class="border px-4 py-2 text-center text-sm">1</td>
+              <td class="border px-4 py-2 text-center text-sm">Active</td>
+              <td class="border px-4 py-2 text-center align-middle text-sm">
+                <button
+                  class="rounded bg-green-500 px-4 py-2 font-bold text-white hover:bg-green-600"
+                >
+                  Manage
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td class="border px-4 py-2 text-center align-middle text-sm">
+                <button
+                  class="rounded bg-yellow-300 px-4 py-2 font-bold hover:bg-yellow-400"
+                >
+                  Action
+                </button>
+              </td>
+              <td class="border px-4 py-2 text-center text-sm">0</td>
+              <td class="border px-4 py-2 text-center text-sm">Active</td>
+              <td class="border px-4 py-2 text-center align-middle text-sm">
+                <button
+                  class="rounded bg-green-500 px-4 py-2 font-bold text-white hover:bg-green-600"
+                >
+                  Manage
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td class="border px-4 py-2 text-center align-middle text-sm">
+                <button
+                  class="rounded bg-yellow-300 px-4 py-2 font-bold hover:bg-yellow-400"
+                >
+                  Comedy
+                </button>
+              </td>
+              <td class="border px-4 py-2 text-center text-sm">0</td>
+              <td class="border px-4 py-2 text-center text-sm">Active</td>
+              <td class="border px-4 py-2 text-center align-middle text-sm">
+                <button
+                  class="rounded bg-green-500 px-4 py-2 font-bold text-white hover:bg-green-600"
+                >
+                  Manage
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </body>
+</html>
