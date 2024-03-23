@@ -33,9 +33,9 @@ window.addEventListener("click", function (e) {
 // Array berisi daftar gambar
 const images = [
   "oppenheimer.jpg",
-  "kung-fu-panda4.jpg",
-  "dune-2.jpg",
-  "demon-slayer.jpg",
+  "kungfupanda4.jpg",
+  "dune2.jpg",
+  "demonslayer.jpg",
 ]; // Path relatif dari folder /src/poster/
 
 // Mendapatkan elemen container gambar
@@ -46,7 +46,7 @@ function renderImages() {
   imageContainer.innerHTML = ""; // Kosongkan kontainer gambar
   images.forEach((image) => {
     const imgElement = document.createElement("img");
-    imgElement.src = `/src/poster/${image}`; // Menambahkan path lengkap ke gambar
+    imgElement.src = `/src/images/movie-poster/${image}`; // Menambahkan path lengkap ke gambar
     imgElement.alt = "Image";
     imgElement.className = "w-full"; // Menambahkan kelas Tailwind CSS untuk gambar
     imageContainer.appendChild(imgElement);
