@@ -11,6 +11,10 @@
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
     <!-- Link CSS -->
     <link href="../src/output.css" rel="stylesheet" />
   </head>
@@ -89,18 +93,18 @@
     </header>
     <!-- Header Section End -->
 
-    <main class="bg-black bg-black pb-28 pt-32 font-sans text-white">
-      <div class="w-full">
+    <main class="flex justify-center bg-black pb-28 pt-32 text-white">
+      <div class="w-530">
         <form
-          class="mx-auto my-2 flex w-[38%] flex-col gap-4 rounded-[1.5rem] bg-white p-12"
+          class="mx-auto my-2 flex w-full flex-col gap-4 rounded-[1.5rem] bg-white p-8 md:p-12"
           action=""
         >
-          <h1 class="mx-auto my-0 text-[2rem] font-bold text-black">
+          <h1 class="text-30 mx-auto my-0 font-bold text-black">
             Create New Account
           </h1>
-          <div class="flex flex-col gap-4 text-[1.5rem] font-[500] text-black">
+          <div class="text-20 flex flex-col gap-4 text-black">
             <div class="border-b-[1px] border-solid border-black">
-              <label for="name">User Name</label><br />
+              <label class="font-bold" for="name">User Name</label><br />
               <input
                 class="w-full text-[1.5rem] font-normal leading-8 focus:outline-none"
                 type="text"
@@ -109,7 +113,7 @@
               />
             </div>
             <div class="border-b-[1px] border-solid border-black">
-              <label for="email">Email</label><br />
+              <label class="font-bold" for="email">Email</label><br />
               <input
                 class="w-full text-[1.5rem] font-normal leading-8 focus:outline-none"
                 type="email"
@@ -118,7 +122,7 @@
               />
             </div>
             <div class="border-b-[1px] border-solid border-black">
-              <label for="phone">Phone</label><br />
+              <label class="font-bold" for="phone">Phone</label><br />
               <input
                 class="w-full text-[1.5rem] font-normal leading-8 focus:outline-none"
                 type="tel"
@@ -127,7 +131,7 @@
               />
             </div>
             <div class="border-b-[1px] border-solid border-black">
-              <label for="password">Password</label><br />
+              <label class="font-bold" for="password">Password</label><br />
               <input
                 class="w-full text-[1.5rem] font-normal leading-8 focus:outline-none"
                 type="password"
@@ -135,8 +139,10 @@
                 id="password"
               />
             </div>
-            <div class="border-b-[1px] border-solid border-black">
-              <label for="confirmPassword">Confirm Password</label><br />
+            <div class="mb-10 border-b-[1px] border-solid border-black">
+              <label class="font-bold" for="confirmPassword"
+                >Confirm Password</label
+              ><br />
               <input
                 class="w-full text-[1.5rem] font-normal leading-8 focus:outline-none"
                 type="password"
@@ -147,17 +153,19 @@
           </div>
           <div class="flex flex-col">
             <button
-              class="rounded-[1.5rem] bg-[#5B50E1] p-6 text-[1.5rem] font-semibold text-white"
+              class="rounded-[1.5rem] bg-[#5B50E1] p-4 text-[1.5rem] font-semibold text-white md:p-6"
             >
               REGISTER
             </button>
-            <div class="flex items-center justify-center">
-              <div class="h-px w-2/5 bg-black"></div>
-              <div class="text-[1.5rem] text-black">or</div>
-              <div class="h-px w-2/5 bg-black"></div>
+            <div class="flex w-full justify-center text-black">
+              <div class="w-75 flex justify-between py-4 text-center font-bold">
+                <hr class="hr-or" />
+                or
+                <hr class="hr-or" />
+              </div>
             </div>
             <a
-              class="rounded-[1.5rem] bg-[#EFD700] p-6 text-center text-[1.5rem] font-semibold text-white"
+              class="rounded-[1.5rem] bg-[#EFD700] p-4 text-center text-[1.5rem] font-semibold text-white md:p-6"
               href="login.html"
               >LOG IN</a
             >
@@ -165,6 +173,7 @@
         </form>
       </div>
     </main>
+
     <!-- end of Form Register -->
 
     <!-- Footer Section Start -->
