@@ -9,7 +9,10 @@ Currently this is just the Front-end development, build using :
 - Css (Tailwind)
 - JavaScript
 
-You can access the deployed web from this link https://theatron.vercel.app/view/register.html
+#How To Access Web
+You can access the deployed web for user from this link https://theatron.vercel.app/view/home.html
+
+If you want to see the admin page use this link https://theatron.vercel.app/view/admin/manageuser.html
 
 Created by team of 8 :
 - Josvian Salim
