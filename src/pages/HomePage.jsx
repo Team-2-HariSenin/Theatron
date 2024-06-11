@@ -1,11 +1,11 @@
 import React from "react";
 import Main from "../components/Main";
-import MovieList from "../components/MovieList";
+import MovieListContainer from "../components/MovieListContainer";
 const HomePage = () => {
   return (
     <>
       <Main />
-      <MovieList />
+      <MovieListContainer />
     </>
   );
 };
