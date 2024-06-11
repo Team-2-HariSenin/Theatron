@@ -6,6 +6,9 @@ export default {
       fontFamily: {
         sans: ["Roboto", "sans-serif"],
       },
+      colors: {
+        customColorNavbar: "#121212",
+      },
     },
     colors: {
       white: "rgba(246, 246, 246, 1)",
