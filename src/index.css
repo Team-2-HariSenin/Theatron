@@ -1,3 +1,50 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Movie Detail_Card */
+.containerTrailerCard::-webkit-scrollbar {
+  display: none;
+}
+
+.containerToMovieDetailCard {
+  display: flex;
+  gap: 8px;
+  overflow-x: scroll;
+}
+
+.containerToMovieDetailCard::-webkit-scrollbar {
+  display: none;
+}
+
+.movieDetailCard1 {
+  flex: 0 0 205px;
+}
+@media (max-width: 425px) {
+  .movieDetailCard1 img {
+    width: 205px;
+    height: 109px;
+  }
+}
+@media (min-width: 768px) {
+  .movieDetailCard1 {
+    flex: 0 0 270px;
+  }
+  .movieDetailCard1 img {
+    width: 270px;
+    height: 143px;
+  }
+}
+@media (min-width: 1024px) {
+  .movieDetailCard1 {
+    flex: 0 0 415px;
+  }
+  .movieDetailCard1 img {
+    width: 415px;
+    height: 220px;
+  }
+}
+
+.movieDetailCard2 {
+  flex: 0 0 176px;
+}
