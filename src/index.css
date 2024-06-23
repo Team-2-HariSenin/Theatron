@@ -5,7 +5,9 @@
 body {
   box-sizing: border-box;
   font-family: "Roboto", sans-serif;
+  background-color: black;
 }
+
 
 .custom-grid-auto-columns {
   grid-auto-columns: calc(25% - 3 / 4 * 0.5rem - 0.5rem);
