@@ -11,6 +11,7 @@ const AdminNavbar = () => {
   const [usersOpen, setUsersOpen] = useState(false);
   const [adminsOpen, setAdminsOpen] = useState(false);
   const [adminOpen, setAdminOpen] = useState(false);
+  const [activeNav, setActiveNav] = useState("movies/overviews");
 
   return (
     <>
@@ -43,20 +44,24 @@ const AdminNavbar = () => {
                 className={` ${moviesOpen ? "flex" : "hidden"} flex-col text-sm font-normal *:cursor-pointer`}
               >
                 <NavLink
+                  onClick={() => setActiveNav("movies/overviews")}
                   to={"movies/overviews"}
-                  className="px-6 py-2 hover:bg-black-40"
+                  activeClassName="text-black"
+                  className={`px-6 py-2 hover:bg-black-40 ${activeNav === "movies/overviews" ? "bg-black-20" : ""}`}
                 >
                   Overviews
                 </NavLink>
                 <NavLink
+                  onClick={() => setActiveNav("movies/add")}
                   to={"movies/add"}
-                  className="px-6 py-2 hover:bg-black-40"
+                  className={`px-6 py-2 hover:bg-black-40 ${activeNav === "movies/add" ? "bg-black-20" : ""}`}
                 >
                   Add Movie
                 </NavLink>
                 <NavLink
+                  onClick={() => setActiveNav("movies/add")}
                   to={"movies/edit"}
-                  className="px-6 py-2 hover:bg-black-40"
+                  className={`px-6 py-2 hover:bg-black-40 ${activeNav === "movies/edit" ? "bg-black-20" : ""}`}
                 >
                   Edit Movie
                 </NavLink>
@@ -73,20 +78,23 @@ const AdminNavbar = () => {
                 className={`${categoriesOpen ? "flex" : "hidden"} flex-col text-sm font-normal`}
               >
                 <NavLink
+                  onClick={() => setActiveNav("categories/overviews")}
                   to={"categories/overviews"}
-                  className="px-6 py-2 hover:bg-black-40"
+                  className={`px-6 py-2 hover:bg-black-40 ${activeNav === "categories/overviews" ? "bg-black-20" : ""}`}
                 >
                   Overviews
                 </NavLink>
                 <NavLink
+                  onClick={() => setActiveNav("categories/add")}
                   to={"categories/add"}
-                  className="px-6 py-2 hover:bg-black-40"
+                  className={`px-6 py-2 hover:bg-black-40 ${activeNav === "categories/add" ? "bg-black-20" : ""}`}
                 >
                   Add Category
                 </NavLink>
                 <NavLink
+                  onClick={() => setActiveNav("categories/edit")}
                   to={"categories/edit"}
-                  className="px-6 py-2 hover:bg-black-40"
+                  className={`px-6 py-2 hover:bg-black-40 ${activeNav === "categories/edit" ? "bg-black-20" : ""}`}
                 >
                   Edit Category
                 </NavLink>
@@ -103,20 +111,23 @@ const AdminNavbar = () => {
                 className={`${writersOpen ? "flex" : "hidden"} flex-col text-sm font-normal`}
               >
                 <NavLink
+                  onClick={() => setActiveNav("writers/overviews")}
                   to={"writers/overviews"}
-                  className="px-6 py-2 hover:bg-black-40"
+                  className={`px-6 py-2 hover:bg-black-40 ${activeNav === "writers/overviews" ? "bg-black-20" : ""}`}
                 >
                   Overviews
                 </NavLink>
                 <NavLink
+                  onClick={() => setActiveNav("writers/add")}
                   to={"writers/add"}
-                  className="px-6 py-2 hover:bg-black-40"
+                  className={`px-6 py-2 hover:bg-black-40 ${activeNav === "writers/add" ? "bg-black-20" : ""}`}
                 >
                   Add Writer
                 </NavLink>
                 <NavLink
+                  onClick={() => setActiveNav("writers/edit")}
                   to={"writers/edit"}
-                  className="px-6 py-2 hover:bg-black-40"
+                  className={`px-6 py-2 hover:bg-black-40 ${activeNav === "writers/edit" ? "bg-black-20" : ""}`}
                 >
                   Edit Writer
                 </NavLink>
@@ -133,20 +144,23 @@ const AdminNavbar = () => {
                 className={`${directorsOpen ? "flex" : "hidden"} flex-col text-sm font-normal`}
               >
                 <NavLink
+                  onClick={() => setActiveNav("directors/overviews")}
                   to={"directors/overviews"}
-                  className="px-6 py-2 hover:bg-black-40"
+                  className={`px-6 py-2 hover:bg-black-40 ${activeNav === "directors/overviews" ? "bg-black-20" : ""}`}
                 >
                   Overviews
                 </NavLink>
                 <NavLink
+                  onClick={() => setActiveNav("directors/add")}
                   to={"directors/add"}
-                  className="px-6 py-2 hover:bg-black-40"
+                  className={`px-6 py-2 hover:bg-black-40 ${activeNav === "directors/add" ? "bg-black-20" : ""}`}
                 >
                   Add Director
                 </NavLink>
                 <NavLink
+                  onClick={() => setActiveNav("directors/edit")}
                   to={"directors/edit"}
-                  className="px-6 py-2 hover:bg-black-40"
+                  className={`px-6 py-2 hover:bg-black-40 ${activeNav === "directors/edit" ? "bg-black-20" : ""}`}
                 >
                   Edit Director
                 </NavLink>
@@ -163,20 +177,23 @@ const AdminNavbar = () => {
                 className={`${starsOpen ? "flex" : "hidden"} flex-col text-sm font-normal`}
               >
                 <NavLink
+                  onClick={() => setActiveNav("stars/overviews")}
                   to={"stars/overviews"}
-                  className="px-6 py-2 hover:bg-black-40"
+                  className={`px-6 py-2 hover:bg-black-40 ${activeNav === "stars/overviews" ? "bg-black-20" : ""}`}
                 >
                   Overviews
                 </NavLink>
                 <NavLink
+                  onClick={() => setActiveNav("stars/add")}
                   to={"stars/add"}
-                  className="px-6 py-2 hover:bg-black-40"
+                  className={`px-6 py-2 hover:bg-black-40 ${activeNav === "stars/add" ? "bg-black-20" : ""}`}
                 >
                   Add Star
                 </NavLink>
                 <NavLink
+                  onClick={() => setActiveNav("stars/edit")}
                   to={"stars/edit"}
-                  className="px-6 py-2 hover:bg-black-40"
+                  className={`px-6 py-2 hover:bg-black-40 ${activeNav === "stars/edit" ? "bg-black-20" : ""}`}
                 >
                   Edit Star
                 </NavLink>
@@ -193,8 +210,9 @@ const AdminNavbar = () => {
                 className={`${usersOpen ? "flex" : "hidden"} flex-col text-sm font-normal`}
               >
                 <NavLink
+                  onClick={() => setActiveNav("users/overviews")}
                   to={"users/overviews"}
-                  className="px-6 py-2 hover:bg-black-40"
+                  className={`px-6 py-2 hover:bg-black-40 ${activeNav === "users/overviews" ? "bg-black-20" : ""}`}
                 >
                   Overviews
                 </NavLink>
@@ -211,20 +229,23 @@ const AdminNavbar = () => {
                 className={`${adminsOpen ? "flex" : "hidden"} flex-col text-sm font-normal`}
               >
                 <NavLink
+                  onClick={() => setActiveNav("admins/overviews")}
                   to={"admins/overviews"}
-                  className="px-6 py-2 hover:bg-black-40"
+                  className={`px-6 py-2 hover:bg-black-40 ${activeNav === "admins/overviews" ? "bg-black-20" : ""}`}
                 >
                   Overviews
                 </NavLink>
                 <NavLink
+                  onClick={() => setActiveNav("admins/add")}
                   to={"admins/add"}
-                  className="px-6 py-2 hover:bg-black-40"
+                  className={`px-6 py-2 hover:bg-black-40 ${activeNav === "admins/add" ? "bg-black-20" : ""}`}
                 >
                   Add Admin
                 </NavLink>
                 <NavLink
+                  onClick={() => setActiveNav("admins/edit")}
                   to={"admins/edit"}
-                  className="px-6 py-2 hover:bg-black-40"
+                  className={`px-6 py-2 hover:bg-black-40 ${activeNav === "admins/edit" ? "bg-black-20" : ""}`}
                 >
                   Edit Admin
                 </NavLink>
@@ -234,15 +255,20 @@ const AdminNavbar = () => {
         </div>
         <div className="fixed bottom-0 left-0 flex h-fit w-full flex-col items-start justify-around bg-black-30 px-6 py-2">
           <div
-            className={`${adminOpen ? "flex" : "hidden"} flex-col text-sm font-normal`}
+            className={`${adminOpen ? "flex" : "hidden"} w-full flex-col text-sm font-normal`}
           >
             <NavLink
+              onClick={() => setActiveNav("profile")}
               to={"profile"}
-              className="px-6 py-2 hover:bg-black-40"
+              className={`w-full px-6 py-2 hover:bg-black-40 ${activeNav === "profile" ? "bg-black-20" : ""}`}
             >
               Profile
             </NavLink>
-            <NavLink to={"admins/add"} className="px-6 py-2 hover:bg-black-40">
+            <NavLink
+              onClick={() => setActiveNav("")}
+              to={"admins/add"}
+              className={`px-6 py-2 hover:bg-black-40`}
+            >
               Logout
             </NavLink>
           </div>
