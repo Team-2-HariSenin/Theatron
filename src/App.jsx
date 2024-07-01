@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  Navigate,
   Route,
   RouterProvider,
   createBrowserRouter,
@@ -13,6 +14,28 @@ import SignUpPage from "./pages/SignUpPage";
 import WatchList from "./pages/WatchList";
 import MovieDetail from "./pages/MovieDetail";
 import Category from "./pages/Category";
+import AdminLayout from "./layouts/AdminLayout";
+import OverviewMovie from "./pages/admin/OverviewMovie";
+import AddMovie from "./pages/admin/AddMovie";
+import EditMovie from "./pages/admin/EditMovie";
+import OverviewCategory from "./pages/admin/OverviewCategory";
+import AddCategory from "./pages/admin/AddCategory";
+import EditCategory from "./pages/admin/EditCategory";
+import OverviewWriter from "./pages/admin/OverviewWriter";
+import AddWriter from "./pages/admin/AddWriter";
+import EditWriter from "./pages/admin/EditWriter";
+import OverviewDirector from "./pages/admin/OverviewDirector";
+import AddDirector from "./pages/admin/AddDirector";
+import EditDirector from "./pages/admin/EditDirector";
+import OverviewStar from "./pages/admin/OverviewStar";
+import AddStar from "./pages/admin/AddStar";
+import EditStar from "./pages/admin/EditStar";
+import OverviewUser from "./pages/admin/OverviewUser";
+import OverviewAdmin from "./pages/admin/OverviewAdmin";
+import AddAdmin from "./pages/admin/AddAdmin";
+import EditAdmin from "./pages/admin/EditAdmin";
+import AdminProfile from "./pages/admin/AdminProfile";
+
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,8 +48,31 @@ const router = createBrowserRouter(
       </Route>
       <Route path="signin" element={<SignInPage />} />
       <Route path="signup" element={<SignUpPage />} />
-    </Route>
-  )
+      <Route path="admin" element={<AdminLayout />}>
+        <Route index element={<Navigate to="movies/overviews" />} />
+        <Route path="movies/overviews" element={<OverviewMovie />} />
+        <Route path="movies/add" element={<AddMovie />} />
+        <Route path="movies/edit" element={<EditMovie />} />
+        <Route path="categories/overviews" element={<OverviewCategory />} />
+        <Route path="categories/add" element={<AddCategory />} />
+        <Route path="categories/edit" element={<EditCategory />} />
+        <Route path="writers/overviews" element={<OverviewWriter />} />
+        <Route path="writers/add" element={<AddWriter />} />
+        <Route path="writers/edit" element={<EditWriter />} />
+        <Route path="stars/overviews" element={<OverviewStar />} />
+        <Route path="stars/add" element={<AddStar />} />
+        <Route path="stars/edit" element={<EditStar />} />
+        <Route path="directors/overviews" element={<OverviewDirector />} />
+        <Route path="directors/add" element={<AddDirector />} />
+        <Route path="directors/edit" element={<EditDirector />} />
+        <Route path="users/overviews" element={<OverviewUser />} />
+        <Route path="admins/overviews" element={<OverviewAdmin />} />
+        <Route path="admins/add" element={<AddAdmin />} />
+        <Route path="admins/edit" element={<EditAdmin />} />
+        <Route path="profile" element={<AdminProfile/>}/>
+      </Route>
+    </Route>,
+  ),
 );
 
 const App = () => {
