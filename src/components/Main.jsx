@@ -55,14 +55,14 @@ const Main = () => {
   const currentMovie = movies[currentIndex];
 
   return (
-    <main>
-      <div className="flex flex-wrap gap-4">
+    <main className="mx-auto py-5 lg:container sm:py-8 md:py-10 lg:py-12">
+      <div className="flex flex-wrap gap-1">
         {/* Section Movie Preview */}
         <section
           id="movie-preview"
-          className="relative ml-8 flex-1 bg-black pb-2 pt-2 lg:w-1/3"
+          className="relative flex-1 bg-black pb-2 pt-2 lg:w-1/3"
         >
-          <div className="container">
+          <div className="">
             <div className="relative mr-6 mt-10">
               <div className="relative">
                 <div className="absolute inset-0 left-4 top-2/4 z-20 flex items-center space-x-4 text-white">
@@ -94,7 +94,7 @@ const Main = () => {
                 <div className="relative h-[94vh] w-full overflow-hidden">
                   <img
                     alt={`${currentMovie.title} Banner`}
-                    className="absolute inset-0 h-full w-full object-cover"
+                    className="absolute inset-0 w-full object-cover"
                     loading="lazy"
                     src={currentMovie.banner}
                     sizes="100vw"
@@ -124,9 +124,9 @@ const Main = () => {
         {/* Section Up Next */}
         <section
           id="up-next"
-          className="mr-6 mt-8 bg-black-10 pb-8 sm:mr-4 sm:pt-8 lg:w-1/3"
+          className="mr-6 mt-8 hidden bg-black-10 pb-8 sm:mr-4 sm:pt-8 lg:block lg:w-1/3"
         >
-          <div className="container mx-auto ml-4">
+          <div className="mx-auto ml-4">
             <h1 className="mb-4 text-base font-bold text-yellow md:text-xl lg:text-2xl">
               Up Next
             </h1>

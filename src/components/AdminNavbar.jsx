@@ -16,7 +16,7 @@ const AdminNavbar = () => {
   return (
     <>
       <div
-        className={`fixed left-0 top-0 h-screen lg:relative ${navbar ? "translate-x-0" : "-translate-x-full"} z-10 w-60 bg-black-30 text-white transition-all duration-300 lg:translate-x-0`}
+        className={`fixed left-0 top-0 h-screen lg:relative ${navbar ? "translate-x-0" : "-translate-x-full"} z-10 min-w-60 max-w-60 bg-black-30 text-white transition-all duration-300 lg:translate-x-0`}
       >
         <div className="fixed flex h-14 w-full items-center justify-around border-b border-white bg-black-30">
           <div
