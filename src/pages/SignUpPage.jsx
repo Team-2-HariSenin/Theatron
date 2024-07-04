@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const SignUpPage = () => {
   const [firstName, setFirstName] = useState("");
@@ -13,50 +14,52 @@ const SignUpPage = () => {
   return (
     <div className="min-h-screen bg-white">
       <div className="py-8 text-center">
-        <h1 class="text-5xl font-inter font-bold text-gray-800">THEATRON</h1>
+        <h1 class="font-inter text-gray-800 text-5xl font-bold">THEATRON</h1>
       </div>
-      <div className="w-full max-w-sm mx-auto">
+      <div className="mx-auto w-full max-w-sm">
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
-            <p className="text-3xl text-gray-800">Create account</p>
-            <label htmlFor="firstName" className="block text-gray-700"></label>
+            <p className="text-gray-800 text-3xl">Create account</p>
+            <label htmlFor="firstName" className="text-gray-700 block"></label>
             <input
               placeholder="First and Last Name"
               type="text"
               id="firstName"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
-              className="w-full mt-1 border rounded-md px-3 py-2 focus:border-sky-500 focus:ring focus:ring-sky-500 focus:outline-none"
+              className="focus:border-sky-500 focus:ring-sky-500 mt-1 w-full rounded-md border px-3 py-2 focus:outline-none focus:ring"
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="email" className="block text-gray-700"></label>
+            <label htmlFor="email" className="text-gray-700 block"></label>
             <input
               placeholder="Your Email Address"
               type="email"
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full mt-1 border rounded-md px-3 py-2 focus:border-sky-500 focus:ring focus:ring-sky-500 focus:outline-none"
+              className="focus:border-sky-500 focus:ring-sky-500 mt-1 w-full rounded-md border px-3 py-2 focus:outline-none focus:ring"
             />
           </div>
           <div className="mb-2">
-            <label htmlFor="password" className="block text-gray-700"></label>
+            <label htmlFor="password" className="text-gray-700 block"></label>
             <input
               placeholder="Create Password"
               type="password"
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full mt-1 border rounded-md px-3 py-2 focus:border-sky-500 focus:ring focus:ring-sky-500 focus:outline-none"
+              className="focus:border-sky-500 focus:ring-sky-500 mt-1 w-full rounded-md border px-3 py-2 focus:outline-none focus:ring"
             />
           </div>
           <div className="py-2">
-          <p className="text-gray-900 font-inter">i Password must be at least 8 characters.</p>
+            <p className="text-gray-900 font-inter">
+              i Password must be at least 8 characters.
+            </p>
           </div>
           <button
             type="submit"
-            className="bg-yellow text-black py-2 px-4 rounded-xl w-full border"
+            className="w-full rounded-xl border bg-yellow px-4 py-2 text-black"
           >
             Create Your THEATRON Account
           </button>
@@ -66,25 +69,24 @@ const SignUpPage = () => {
               Show Password
             </label>
           </div>
+        </form>
+        <div className="flex w-full flex-col justify-center">
           <div class="relative py-2">
             <div class="absolute inset-0 flex items-center">
-              <div class="w-full border-b border-gray-300"></div>
+              <div class="border-gray-300 w-full border-b"></div>
             </div>
             <div class="relative flex justify-center">
-              <span class="bg-white px-4 text-sm text-gray-500">
+              <span class="text-gray-500 bg-white px-4 text-sm">
                 Already have an account?
               </span>
             </div>
           </div>
-          <p className="text-center">
-          <button
-            type="submit"
-            className="bg-gray-100 text-black text-sm py-2 rounded-xl w-3/4 border"
-          >
+          <Link to={"/signin"} className="text-center">
+            <button className="bg-gray-100 w-3/4 rounded-xl border py-2 text-sm text-black">
               Sign In
             </button>
-          </p>
-        </form>
+          </Link>
+        </div>
       </div>
     </div>
   );
