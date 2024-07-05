@@ -13,6 +13,10 @@ body {
   grid-auto-columns: calc(25% - 3 / 4 * 0.5rem - 0.5rem);
 }
 
+.hide-scrollbar {
+  scrollbar-width: none;
+}
+
 .hide-scrollbar::-webkit-scrollbar{
   display: none;
   width: 0;
