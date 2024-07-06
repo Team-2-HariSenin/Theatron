@@ -3,9 +3,10 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaTrashCan } from "react-icons/fa6";
 import { FaEdit } from "react-icons/fa";
+import useAuthStore from "../../stores/useAuthStore";
 
 const OverviewUser = () => {
-  const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkFkbWluMSIsImVtYWlsIjoiYWRtaW4xQGV4YW1wbGUuY29tIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNzIwMDY3MDA5fQ.ImYnpJcCPh5CbXpe-c6vSrvcFudTVt7vWkBaINDgMY0`;
+  const { token } = useAuthStore((state) => state);
 
   const [searchInput, setSearchInput] = useState("");
   const [userData, setUserData] = useState([]);
@@ -93,9 +94,6 @@ const OverviewUser = () => {
                 <th scope="col" className="px-6 py-4 text-center">
                   Total Watchlist
                 </th>
-                <th scope="col" className="px-6 py-4 text-center">
-                  Action
-                </th>
               </tr>
             </thead>
             <tbody>
@@ -114,19 +112,11 @@ const OverviewUser = () => {
                     <td className="px-6 py-4 text-center">
                       {user.total_watchlist}
                     </td>
-                    <td className="flex items-center justify-center gap-2 px-6 py-4">
-                      <Link className="relative -top-[1px] left-[3.5px]">
-                        <FaEdit size={26} />
-                      </Link>
-                      <button className="text-blue-600 font-medium hover:underline">
-                        <FaTrashCan size={21} />
-                      </button>
-                    </td>
                   </tr>
                 ))
               ) : (
                 <tr>
-                  <td colSpan="6" className="px-6 py-4 text-center">
+                  <td colSpan="5" className="px-6 py-4 text-center">
                     {`No data found for "${searchInput}"`}
                   </td>
                 </tr>

@@ -1,19 +1,47 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAuthStore from "../stores/useAuthStore";
+import axios from "axios";
 
 const SignInPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const login = useAuthStore((state) => state.login);
+  const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Implement sign in logic here (e.g., API call, data validation)
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/auth/login",
+        {
+          email,
+          password,
+        },
+      );
+      console.log(response.data.data);
+      const { token, isAdmin } = response.data.data;
+      login(token, isAdmin);
+      localStorage.setItem("token", token);
+      localStorage.setItem("isAdmin", isAdmin);
+
+      // Redirect based on isAdmin
+      if (isAdmin) {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
+    } catch (error) {
+      console.error("Login failed", error);
+    }
   };
 
   return (
     <div className="min-h-screen bg-white">
       <div className="py-8 text-center">
-        <h1 class="font-inter text-gray-800 text-5xl font-bold">THEATRON</h1>
+        <h1 className="font-inter text-gray-800 text-5xl font-bold">
+          THEATRON
+        </h1>
       </div>
       <div className="mx-auto w-full max-w-sm">
         <form onSubmit={handleSubmit}>
@@ -64,12 +92,12 @@ const SignInPage = () => {
         </form>
       </div>
       <div className="mx-auto flex w-full max-w-sm flex-col justify-center">
-        <div class="relative">
-          <div class="absolute inset-0 flex items-center">
-            <div class="border-gray-300 w-full border-b"></div>
+        <div className="relative">
+          <div className="absolute inset-0 flex items-center">
+            <div className="border-gray-300 w-full border-b"></div>
           </div>
-          <div class="relative flex justify-center">
-            <span class="text-gray-500 bg-white px-4 text-sm">
+          <div className="relative flex justify-center">
+            <span className="text-gray-500 bg-white px-4 text-sm">
               New to THEATRON?
             </span>
           </div>

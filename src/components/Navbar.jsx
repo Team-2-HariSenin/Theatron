@@ -11,6 +11,7 @@ import { GoChevronDown } from "react-icons/go";
 import { BsBookmarkPlus } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link } from "react-router-dom";
+import useAuthStore from "../stores/useAuthStore";
 
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -19,7 +20,7 @@ const Navbar = () => {
     setIsMobileMenuOpen((prev) => !prev);
   };
 
-  const isLogin = false;
+  const { isAuthenticated, logout } = useAuthStore((state) => state);
 
   const classNames = (...classes) => classes.filter(Boolean).join(" ");
 
@@ -33,7 +34,9 @@ const Navbar = () => {
           <GiHamburgerMenu className="h-6 w-6" />
         </button>
         <div className="flex flex-1 items-center justify-between">
-          <h1 className="mx-5 self-start text-xl font-bold">THEATRON</h1>
+          <Link to={"/"} className="mx-5 self-start text-xl font-bold">
+            THEATRON
+          </Link>
           <div className="flex items-center gap-2 sm:hidden">
             <div className="cursor-pointer">
               <IoIosSearch />
@@ -113,7 +116,7 @@ const Navbar = () => {
               <BsBookmarkPlus />
               Watchlist
             </Link>
-            {isLogin ? (
+            {isAuthenticated ? (
               <Menu as="div" className="relative inline-block text-left">
                 <MenuButton className="inline-flex justify-center gap-x-1.5 bg-customColorNavbar px-3 py-2 text-sm text-white">
                   User
@@ -158,6 +161,7 @@ const Navbar = () => {
                           {({ active }) => (
                             <button
                               type="submit"
+                              onClick={() => logout()}
                               className={classNames(
                                 active
                                   ? "bg-gray-100 text-gray-900"
