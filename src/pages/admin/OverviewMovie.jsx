@@ -1,9 +1,8 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { FaInfo, FaTrashCan } from "react-icons/fa6";
+import { FaTrashCan } from "react-icons/fa6";
 import { FaEdit, FaInfoCircle } from "react-icons/fa";
-import { Button } from "@headlessui/react";
 
 const OverviewMovie = () => {
   const [searchInput, setSearchInput] = useState("");

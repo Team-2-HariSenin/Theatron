@@ -1,12 +1,12 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { FaInfo, FaTrashCan } from "react-icons/fa6";
-import { FaEdit, FaInfoCircle } from "react-icons/fa";
-import { Button } from "@headlessui/react";
+import { FaTrashCan } from "react-icons/fa6";
+import { FaEdit } from "react-icons/fa";
+import useAuthStore from "../../stores/useAuthStore";
 
 const OverviewWriter = () => {
-  const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkFkbWluMSIsImVtYWlsIjoiYWRtaW4xQGV4YW1wbGUuY29tIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNzIwMDY3MDA5fQ.ImYnpJcCPh5CbXpe-c6vSrvcFudTVt7vWkBaINDgMY0`;
+  const { token } = useAuthStore((state) => state);
 
   const [searchInput, setSearchInput] = useState("");
   const [writerData, setWriterData] = useState([]);

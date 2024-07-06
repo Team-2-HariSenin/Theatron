@@ -27,9 +27,12 @@ const AdminNavbar = () => {
             <div className="h-1 w-6 rounded-full bg-white" />
             <div className="h-1 w-6 rounded-full bg-white" />
           </div>
-          <h1 className="mx-auto cursor-pointer text-2xl font-black">
+          <NavLink
+            to={"/"}
+            className="mx-auto cursor-pointer text-2xl font-black"
+          >
             THEATRON
-          </h1>
+          </NavLink>
         </div>
         <div className="h-full overflow-scroll px-5 py-16">
           <div className="flex flex-col gap-3">

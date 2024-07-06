@@ -6,35 +6,9 @@ const MovieList = () => {
 
   const elementRef = useRef(null);
   const cardRefs = useRef([]);
-  const [entriesCard, setEntriesCard] = useState([]);
   const [leftArrowDisable, setLeftArrowDisable] = useState(true);
   const [rightArrowDisable, setRightArrowDisable] = useState(false);
   const [distance, setDistance] = useState(0);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      const status = cardRefs.current.map((ref, index) => {
-        const entry = entries.find((e) => e.target === ref);
-        return `index: ${index} is ${entry ? entry.isIntersecting : "not observed"}`;
-      });
-      console.log(status);
-    });
-
-    cardRefs.current.forEach((ref) => {
-      if (ref) {
-        observer.observe(ref);
-      }
-    });
-
-    return () => {
-      // Cleanup the observer on component unmount
-      cardRefs.current.forEach((ref) => {
-        if (ref) {
-          observer.unobserve(ref);
-        }
-      });
-    };
-  }, []);
 
   const calculateDistance = () => {
     if (elementRef.current) {
@@ -57,9 +31,7 @@ const MovieList = () => {
       const calculatedDistance =
         elementRef.current.clientWidth -
         (elementRef.current.clientWidth - elementWidth);
-      console.log("element", elementWidth);
       setDistance(calculatedDistance);
-      console.log(calculatedDistance); // Debugging: Check the calculated distance
     }
   };
 

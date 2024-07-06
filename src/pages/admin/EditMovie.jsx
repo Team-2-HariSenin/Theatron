@@ -7,13 +7,14 @@ import {
   useNavigate,
 } from "react-router-dom";
 import axios from "axios";
+import useAuthStore from "../../stores/useAuthStore";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
 function EditMovie() {
-  const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkFkbWluMSIsImVtYWlsIjoiYWRtaW4xQGV4YW1wbGUuY29tIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNzIwMjUwOTI5fQ.12YW0lWNA7DrJB664F6JJHmKoWhLbLQStXcl0sYMJmA`;
+  const { token } = useAuthStore((state) => state);
 
   const query = useQuery();
   const idMovie = query.get("id_movie");
