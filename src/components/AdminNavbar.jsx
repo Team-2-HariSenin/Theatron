@@ -58,7 +58,7 @@ const AdminNavbar = () => {
                   Add Movie
                 </NavLink>
                 <NavLink
-                  onClick={() => setActiveNav("movies/add")}
+                  onClick={() => setActiveNav("movies/edit")}
                   to={"movies/edit"}
                   className={`px-6 py-2 hover:bg-black-40 ${activeNav === "movies/edit" ? "bg-black-20" : ""}`}
                 >

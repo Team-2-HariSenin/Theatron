@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { DiEclipse } from "react-icons/di";
 
 const AddMovie = () => {
   const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkFkbWluMSIsImVtYWlsIjoiYWRtaW4xQGV4YW1wbGUuY29tIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNzIwMDY3MDA5fQ.ImYnpJcCPh5CbXpe-c6vSrvcFudTVt7vWkBaINDgMY0`;
@@ -47,7 +48,15 @@ const AddMovie = () => {
           res = await axios.get(url);
         }
 
-        setter(res.data.data);
+        if (setter === setDataDirector) {
+          setter(res.data.data.directors);
+        } else if (setter === setDataWriter) {
+          setter(res.data.data.writers);
+        } else if (setter === setDataStar) {
+          setter(res.data.data.stars);
+        } else if (setter === setDataCategory) {
+          setter(res.data.data.categories);
+        }
       } catch (err) {
         console.error("Error fetching data:", err);
       }
@@ -94,18 +103,6 @@ const AddMovie = () => {
       setNewTrailer("");
     }
   }
-
-  const onTrailerChange = (e) => {
-    setNewTrailer(e.target.value);
-  };
-
-  const onBannerChange = (e) => {
-    setBanner(e.target.files[0]);
-  };
-
-  const onPosterChange = (e) => {
-    setPoster(e.target.files[0]);
-  };
 
   const addImage = async (idMovie) => {
     const formData = new FormData();
