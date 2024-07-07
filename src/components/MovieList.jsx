@@ -1,11 +1,39 @@
 import React, { useRef, useState, useEffect } from "react";
 import CardMovie from "./CardMovie";
+import axios from "axios";
 
-const MovieList = () => {
-  const cardMovie = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+const MovieList = ({ categoryId }) => {
+  const [movieData, setMovieData] = useState([]);
+  const [title, setTitle] = useState("");
+
+  const getCategories = async () => {
+    try {
+      const response = await axios.get(
+        `http://127.0.0.1:3000/api/movie/all-category?id_category=${categoryId}`,
+      );
+      setTitle(response.data.data.categories[0].name);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const getMovies = async () => {
+    try {
+      const response = await axios.get(
+        `http://127.0.0.1:3000/api/movie/category/${categoryId}?limit=10`,
+      );
+      setMovieData(response.data.data.movies);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    getCategories();
+    getMovies();
+  }, []);
 
   const elementRef = useRef(null);
-  const cardRefs = useRef([]);
   const [leftArrowDisable, setLeftArrowDisable] = useState(true);
   const [rightArrowDisable, setRightArrowDisable] = useState(false);
   const [distance, setDistance] = useState(0);
@@ -103,7 +131,7 @@ const MovieList = () => {
               <rect width="4" height="28" rx="2" fill="#F5C518" />
             </svg>
           </span>{" "}
-          Indonesia Movies & TV
+          {title}
         </h3>
       </div>
 
@@ -129,13 +157,17 @@ const MovieList = () => {
           className="custom-grid-auto-columns hide-scrollbar m-h-[4em] relative grid snap-mandatory grid-flow-col gap-2 overflow-auto px-4 lg:gap-4 xl:gap-6"
         >
           {" "}
-          {cardMovie.map((item, index) => (
+          {movieData.map((movie) => (
             <div
-              key={index}
-              ref={(el) => (cardRefs.current[index] = el)}
+              key={movie.id}
               className="relative col-span-2 mb-1 mr-0 inline-flex w-full min-w-full snap-start flex-col gap-2 rounded bg-black-20 pb-4 text-base font-normal"
             >
-              <CardMovie />
+              <CardMovie
+                id_movie={movie.id}
+                src={movie.url_poster}
+                title={movie.name}
+                rateAverage={Number(movie.rate_average)}
+              />
             </div>
           ))}
         </div>

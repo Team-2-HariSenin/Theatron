@@ -119,9 +119,6 @@ const OverviewMovie = () => {
                       {movie.watchlist_count}
                     </td>
                     <td className="flex items-center justify-center gap-2 px-6 py-4">
-                      <button>
-                        <FaInfoCircle size={24} />
-                      </button>
                       <Link
                         to={`/admin/movies/edit?id_movie=${movie.id}`}
                         className="relative -top-[1px] left-[3.5px]"
