@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 import { IoIosSearch } from "react-icons/io";
-import {
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuItems,
-  Transition,
-} from "@headlessui/react";
+import { Menu, MenuButton, MenuItems, Transition } from "@headlessui/react";
 import { GoChevronDown } from "react-icons/go";
 import { BsBookmarkPlus } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -53,7 +47,7 @@ const Navbar = () => {
               <div className="flex items-center">
                 <input
                   type="text"
-                  className="w-full rounded py-1 pl-10 pr-20"
+                  className="w-full rounded py-1 pl-10 pr-20 text-black-10"
                   placeholder="Search..."
                 />
                 <IoIosSearch className="text-gray-500 absolute left-2 top-1/2 -translate-y-1/2 transform" />
@@ -81,18 +75,18 @@ const Navbar = () => {
                 leaveFrom="transform opacity-100 scale-100"
                 leaveTo="transform opacity-0 scale-95"
               >
-                <MenuItems className="absolute right-0 z-50 mt-2 w-56 origin-top-right rounded-md bg-black-10 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <Menu.Items className="absolute right-0 z-50 mt-2 w-56 origin-top-right rounded-md bg-black-10 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                   <div className="py-1">
                     {[
-                      "Category 1",
-                      "Category 2",
-                      "Category 3",
-                      "Category 4",
+                      { name: "Category 1", path: "/category1" },
+                      { name: "Category 2", path: "/category2" },
+                      { name: "Category 3", path: "/category3" },
+                      { name: "Category 4", path: "/category4" },
                     ].map((category) => (
-                      <MenuItem key={category}>
+                      <Menu.Item key={category.name}>
                         {({ active }) => (
-                          <a
-                            href="#"
+                          <Link
+                            to={category.path}
                             className={classNames(
                               active
                                 ? "bg-gray-100 text-gray-900"
@@ -100,13 +94,13 @@ const Navbar = () => {
                               "block px-4 py-2 text-sm",
                             )}
                           >
-                            {category}
-                          </a>
+                            {category.name}
+                          </Link>
                         )}
-                      </MenuItem>
+                      </Menu.Item>
                     ))}
                   </div>
-                </MenuItems>
+                </Menu.Items>
               </Transition>
             </Menu>
             <Link
@@ -133,17 +127,17 @@ const Navbar = () => {
                   leaveFrom="transform opacity-100 scale-100"
                   leaveTo="transform opacity-0 scale-95"
                 >
-                  <MenuItems className="absolute right-0 z-50 mt-2 w-56 origin-top-right rounded-md bg-black-20 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                  <Menu.Items className="absolute right-0 z-50 mt-2 w-56 origin-top-right rounded-md bg-black-20 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                     <div className="py-1">
                       {[
-                        "Your Activity",
-                        "Your Watchlist",
-                        "Account Setting",
+                        { name: "Your Activity", path: "/activity" },
+                        { name: "Your Watchlist", path: "/watchlist" },
+                        { name: "Account Setting", path: "/settings" },
                       ].map((item) => (
-                        <MenuItem key={item}>
+                        <Menu.Item key={item.name}>
                           {({ active }) => (
-                            <a
-                              href="#"
+                            <Link
+                              to={item.path}
                               className={classNames(
                                 active
                                   ? "bg-gray-100 text-gray-900"
@@ -151,13 +145,13 @@ const Navbar = () => {
                                 "block px-4 py-2 text-sm",
                               )}
                             >
-                              {item}
-                            </a>
+                              {item.name}
+                            </Link>
                           )}
-                        </MenuItem>
+                        </Menu.Item>
                       ))}
                       <form method="POST" action="#">
-                        <MenuItem>
+                        <Menu.Item>
                           {({ active }) => (
                             <button
                               type="submit"
@@ -172,10 +166,10 @@ const Navbar = () => {
                               Log out
                             </button>
                           )}
-                        </MenuItem>
+                        </Menu.Item>
                       </form>
                     </div>
-                  </MenuItems>
+                  </Menu.Items>
                 </Transition>
               </Menu>
             ) : (
@@ -204,95 +198,110 @@ const Navbar = () => {
               leaveFrom="transform opacity-100 scale-100"
               leaveTo="transform opacity-0 scale-95"
             >
-              <MenuItems className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-black-10 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+              <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-black-10 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                 <div className="py-1">
-                  {["Category 1", "Category 2", "Category 3", "Category 4"].map(
-                    (category) => (
-                      <MenuItem key={category}>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(
-                              active
-                                ? "bg-gray-100 text-gray-900"
-                                : "text-gray-700",
-                              "block px-4 py-2 text-sm",
-                            )}
-                          >
-                            {category}
-                          </a>
-                        )}
-                      </MenuItem>
-                    ),
-                  )}
-                </div>
-              </MenuItems>
-            </Transition>
-          </Menu>
-
-          <Link to={"/watchlist"} className="flex items-center gap-1">
-            <BsBookmarkPlus />
-            Watchlist
-          </Link>
-
-          <Menu as="div" className="relative inline-block text-left">
-            <MenuButton className="inline-flex w-full justify-center gap-x-1.5 bg-customColorNavbar py-2 text-sm text-white">
-              User
-              <GoChevronDown
-                className="text-gray-400 -mr-1 h-5 w-5"
-                aria-hidden="true"
-              />
-            </MenuButton>
-            <Transition
-              enter="transition ease-out duration-100"
-              enterFrom="transform opacity-0 scale-95"
-              enterTo="transform opacity-100 scale-100"
-              leave="transition ease-in duration-75"
-              leaveFrom="transform opacity-100 scale-100"
-              leaveTo="transform opacity-0 scale-95"
-            >
-              <MenuItems className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-black-10 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                <div className="py-1">
-                  {["Your Activity", "Your Watchlist", "Account Setting"].map(
-                    (item) => (
-                      <MenuItem key={item}>
-                        {({ active }) => (
-                          <Link
-                            to={"/signin"}
-                            className={classNames(
-                              active
-                                ? "bg-gray-100 text-gray-900"
-                                : "text-gray-700",
-                              "block px-4 py-2 text-sm",
-                            )}
-                          >
-                            {item}
-                          </Link>
-                        )}
-                      </MenuItem>
-                    ),
-                  )}
-                  <form method="POST" action="#">
-                    <MenuItem>
+                  {[
+                    { name: "Category 1", path: "/category1" },
+                    { name: "Category 2", path: "/category2" },
+                    { name: "Category 3", path: "/category3" },
+                    { name: "Category 4", path: "/category4" },
+                  ].map((category) => (
+                    <Menu.Item key={category.name}>
                       {({ active }) => (
-                        <button
-                          type="submit"
+                        <Link
+                          to={category.path}
                           className={classNames(
                             active
                               ? "bg-gray-100 text-gray-900"
                               : "text-gray-700",
-                            "block w-full px-4 py-2 text-left text-sm",
+                            "block px-4 py-2 text-sm",
                           )}
                         >
-                          Log out
-                        </button>
+                          {category.name}
+                        </Link>
                       )}
-                    </MenuItem>
-                  </form>
+                    </Menu.Item>
+                  ))}
                 </div>
-              </MenuItems>
+              </Menu.Items>
             </Transition>
           </Menu>
+          <Link
+            to={"/watchlist"}
+            className="text-gray-700 hover:bg-gray-100 w-full px-4 py-2 text-sm"
+          >
+            Watchlist
+          </Link>
+          {isAuthenticated ? (
+            <Menu as="div" className="relative inline-block text-left">
+              <MenuButton className="inline-flex w-full justify-center gap-x-1.5 bg-customColorNavbar py-2 text-sm text-white">
+                User
+                <GoChevronDown
+                  className="text-gray-400 -mr-1 h-5 w-5"
+                  aria-hidden="true"
+                />
+              </MenuButton>
+              <Transition
+                enter="transition ease-out duration-100"
+                enterFrom="transform opacity-0 scale-95"
+                enterTo="transform opacity-100 scale-100"
+                leave="transition ease-in duration-75"
+                leaveFrom="transform opacity-100 scale-100"
+                leaveTo="transform opacity-0 scale-95"
+              >
+                <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-black-10 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                  <div className="py-1">
+                    {[
+                      { name: "Your Activity", path: "/activity" },
+                      { name: "Your Watchlist", path: "/watchlist" },
+                      { name: "Account Setting", path: "/settings" },
+                    ].map((item) => (
+                      <Menu.Item key={item.name}>
+                        {({ active }) => (
+                          <Link
+                            to={item.path}
+                            className={classNames(
+                              active
+                                ? "bg-gray-100 text-gray-900"
+                                : "text-gray-700",
+                              "block px-4 py-2 text-sm",
+                            )}
+                          >
+                            {item.name}
+                          </Link>
+                        )}
+                      </Menu.Item>
+                    ))}
+                    <form method="POST" action="#">
+                      <Menu.Item>
+                        {({ active }) => (
+                          <button
+                            type="submit"
+                            onClick={() => logout()}
+                            className={classNames(
+                              active
+                                ? "bg-gray-100 text-gray-900"
+                                : "text-gray-700",
+                              "block w-full px-4 py-2 text-left text-sm",
+                            )}
+                          >
+                            Log out
+                          </button>
+                        )}
+                      </Menu.Item>
+                    </form>
+                  </div>
+                </Menu.Items>
+              </Transition>
+            </Menu>
+          ) : (
+            <Link
+              to={"/signin"}
+              className="text-gray-700 hover:bg-gray-100 w-full px-4 py-2 text-sm"
+            >
+              Sign in
+            </Link>
+          )}
         </div>
       )}
     </div>
