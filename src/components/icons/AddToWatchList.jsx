@@ -1,8 +1,10 @@
 import React from "react";
 
-const AddToWatchList = () => {
+const AddToWatchList = ({ className }) => {
   return (
-    <div className="group absolute left-0 top-0 z-30 h-[2.6rem] w-8 cursor-pointer text-2xl">
+    <div
+      className={`group absolute left-0 top-0 z-30 cursor-pointer text-2xl ${className}`}
+    >
       <svg
         className="relative h-auto w-full"
         width="24px"
