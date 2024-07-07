@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import useAuthStore from "../stores/useAuthStore";
 
 const AdminNavbar = () => {
   const [navbar, setNavbar] = useState(false);
@@ -12,6 +13,8 @@ const AdminNavbar = () => {
   const [adminsOpen, setAdminsOpen] = useState(false);
   const [adminOpen, setAdminOpen] = useState(false);
   const [activeNav, setActiveNav] = useState("movies/overviews");
+
+  const logout = useAuthStore((state) => state.logout);
 
   return (
     <>
@@ -267,8 +270,7 @@ const AdminNavbar = () => {
               Profile
             </NavLink>
             <NavLink
-              onClick={() => setActiveNav("")}
-              to={"admins/add"}
+              onClick={() => logout()}
               className={`px-6 py-2 hover:bg-black-40`}
             >
               Logout
