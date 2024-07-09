@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from "react";
 import AddToWatchList from "./icons/AddToWatchList";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuthStore from "../stores/useAuthStore";
 import axios from "axios";
+import useRatingStore from "../stores/useRatingStore";
 
 const CardMovie = ({ type, id_movie, src, title, rateAverage }) => {
   const [loading, setLoading] = useState(false);
-  const { token } = useAuthStore((state) => state);
+  const { token, isAuthenticated } = useAuthStore((state) => state);
   const [isWatchList, setIsWatchList] = useState(false);
+
+  const { setActive, setTitleMovie, setIdMovie } = useRatingStore(
+    (state) => state,
+  );
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     try {
@@ -22,7 +29,9 @@ const CardMovie = ({ type, id_movie, src, title, rateAverage }) => {
         );
         setIsWatchList(response.data.data.watchlist);
       };
-      getWatchListStatus();
+      if (isAuthenticated) {
+        getWatchListStatus();
+      }
     } catch (error) {
       console.error("Error fetching data:", error);
     }
@@ -50,7 +59,16 @@ const CardMovie = ({ type, id_movie, src, title, rateAverage }) => {
   };
 
   const handleAddToWatchList = () => {
+    if (!isAuthenticated) {
+      return navigate("/signin");
+    }
     watchlistToggle();
+  };
+
+  const handleAddRating = () => {
+    setIdMovie(id_movie);
+    setTitleMovie(title);
+    setActive(true);
   };
   return (
     <>
@@ -93,7 +111,10 @@ const CardMovie = ({ type, id_movie, src, title, rateAverage }) => {
               </svg>
               {rateAverage.toFixed(1)}
             </div>
-            <button className="group relative inline-block min-h-8 min-w-12 max-w-full cursor-pointer overflow-hidden rounded bg-tranparent px-3 text-base font-medium tracking-[.03125em]">
+            <button
+              onClick={() => handleAddRating()}
+              className="group relative inline-block min-h-8 min-w-12 max-w-full cursor-pointer overflow-hidden rounded bg-tranparent px-3 text-base font-medium tracking-[.03125em]"
+            >
               <span className="mr-0 text-base font-normal -tracking-tight text-light-blue">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -171,7 +192,10 @@ const CardMovie = ({ type, id_movie, src, title, rateAverage }) => {
               </svg>
               {rateAverage.toFixed(1)}
             </div>
-            <button className="group relative inline-block min-h-8 min-w-12 max-w-full cursor-pointer overflow-hidden rounded bg-tranparent px-3 text-base font-medium tracking-[.03125em]">
+            <button
+              onClick={() => handleAddRating()}
+              className="group relative inline-block min-h-8 min-w-12 max-w-full cursor-pointer overflow-hidden rounded bg-tranparent px-3 text-base font-medium tracking-[.03125em]"
+            >
               <span className="mr-0 text-base font-normal -tracking-tight text-light-blue">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
