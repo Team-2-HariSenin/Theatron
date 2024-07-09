@@ -6,14 +6,15 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
 } from "react-router-dom";
-import HomePage from "./pages/HomePage";
+import useAuthStore from "./stores/useAuthStore";
 import MainLayout from "./layouts/MainLayout";
 import NavFootLayout from "./layouts/NavFootLayout";
-import SignInPage from "./pages/SignInPage";
-import SignUpPage from "./pages/SignUpPage";
+import HomePage from "./pages/HomePage";
 import WatchList from "./pages/WatchList";
 import MovieDetail from "./pages/MovieDetail";
 import Category from "./pages/Category";
+import SignInPage from "./pages/SignInPage";
+import SignUpPage from "./pages/SignUpPage";
 import AdminLayout from "./layouts/AdminLayout";
 import OverviewMovie from "./pages/admin/OverviewMovie";
 import AddMovie from "./pages/admin/AddMovie";
@@ -36,7 +37,6 @@ import AddAdmin from "./pages/admin/AddAdmin";
 import EditAdmin from "./pages/admin/EditAdmin";
 import AdminProfile from "./pages/admin/AdminProfile";
 import ProtectedRoute from "./components/ProtectedRoute";
-import useAuthStore from "./stores/useAuthStore";
 
 const router = createBrowserRouter(
   createRoutesFromElements(

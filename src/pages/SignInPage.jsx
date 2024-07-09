@@ -19,7 +19,6 @@ const SignInPage = () => {
           password,
         },
       );
-      console.log(response.data.data);
       const { token, isAdmin } = response.data.data;
       login(token, isAdmin);
       localStorage.setItem("token", token);
