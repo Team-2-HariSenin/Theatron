@@ -37,6 +37,9 @@ import AddAdmin from "./pages/admin/AddAdmin";
 import EditAdmin from "./pages/admin/EditAdmin";
 import AdminProfile from "./pages/admin/AdminProfile";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Writer from "./pages/Writer";
+import Star from "./pages/Star";
+import Director from "./pages/Director";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -48,6 +51,9 @@ const router = createBrowserRouter(
         </Route>
         <Route path="detail" element={<MovieDetail />} />
         <Route path="/category/:id" element={<Category />} />
+        <Route path="/writer/:id" element={<Writer />} />
+        <Route path="/star/:id" element={<Star />} />
+        <Route path="/director/:id" element={<Director />} />
       </Route>
       <Route path="signin" element={<SignInPage />} />
       <Route path="signup" element={<SignUpPage />} />
