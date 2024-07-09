@@ -24,7 +24,7 @@ const WatchList = () => {
     getWatchList();
   }, []);
   return (
-    <div className="mx-auto flex w-full flex-col bg-black-10 py-5 lg:w-[1024px] xl:w-[1280px]">
+    <div className="mx-auto flex w-full flex-col py-5 lg:container">
       <div className="relative mb-8 w-full align-baseline text-xl font-semibold leading-[1.2em] tracking-[0.0125em] text-white">
         <h3 className="m-h-[2.4em] relative flex items-center gap-2 overflow-hidden pl-3 text-2xl leading-[29px] text-white sm:text-4xl">
           <span>
@@ -37,7 +37,7 @@ const WatchList = () => {
               <rect width="4" height="28" rx="2" fill="#F5C518" />
             </svg>
           </span>{" "}
-          Watchlist
+          Your Watchlist
         </h3>
       </div>
 

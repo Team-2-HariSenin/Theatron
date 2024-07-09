@@ -47,7 +47,7 @@ const router = createBrowserRouter(
           <Route index element={<WatchList />} />
         </Route>
         <Route path="detail" element={<MovieDetail />} />
-        <Route path="/:category" element={<Category />} />
+        <Route path="/category/:id" element={<Category />} />
       </Route>
       <Route path="signin" element={<SignInPage />} />
       <Route path="signup" element={<SignUpPage />} />

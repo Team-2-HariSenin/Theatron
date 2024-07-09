@@ -1,11 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import CardMovie from "../components/CardMovie";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 const Category = () => {
-  const cardMovie = [1, 2, 3, 4, 5, 6];
+  const { id } = useParams();
+
+  const [categoryData, setCategoryData] = useState([]);
+  const [categoryName, setCategoryName] = useState("");
+
+  const getMovieByCategory = async () => {
+    try {
+      const response = await axios.get(
+        `http://127.0.0.1:3000/api/movie/category/${id}`,
+      );
+      setCategoryData(response.data.data.movies);
+      setCategoryName(response.data.data.name);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    getMovieByCategory();
+  }, [id]);
 
   return (
-    <div className="mx-auto flex w-full flex-col bg-black-10 py-5 lg:w-[1024px] xl:w-[1280px]">
+    <div className="mx-auto flex w-full flex-col py-5 lg:container">
       <div className="relative mb-8 w-full align-baseline text-xl font-semibold leading-[1.2em] tracking-[0.0125em] text-white">
         <h3 className="m-h-[2.4em] relative flex items-center gap-2 overflow-hidden pl-3 text-2xl leading-[29px] text-white sm:text-4xl">
           <span>
@@ -18,7 +39,7 @@ const Category = () => {
               <rect width="4" height="28" rx="2" fill="#F5C518" />
             </svg>
           </span>{" "}
-          Category Name
+          {categoryName}
         </h3>
       </div>
 
@@ -26,12 +47,17 @@ const Category = () => {
         {/* Card Movie */}
         <div className="hide-scrollbar m-h-[4em] relative grid snap-mandatory grid-cols-4 gap-4 px-4 xs:grid-cols-6 md:grid-cols-8 lg:grid-cols-12 lg:gap-4 xl:gap-6">
           {" "}
-          {cardMovie.map((item, index) => (
+          {categoryData.map((category, index) => (
             <div
-              key={index}
+              key={category.id}
               className="relative col-span-2 mb-1 mr-0 inline-flex w-full min-w-full snap-start flex-col gap-2 rounded bg-black-20 pb-4 text-base font-normal"
             >
-              <CardMovie />
+              <CardMovie
+                id_movie={category.id}
+                src={category.url_poster}
+                title={category.name}
+                rateAverage={Number(category.rate_average)}
+              />
             </div>
           ))}
         </div>

@@ -113,14 +113,14 @@ const CardMovie = ({ type, id_movie, src, title, rateAverage }) => {
             </div>
             <button
               onClick={() => handleAddRating()}
-              className="group relative inline-block min-h-8 min-w-12 max-w-full cursor-pointer overflow-hidden rounded bg-tranparent px-3 text-base font-medium tracking-[.03125em]"
+              className="group relative inline-block min-h-8 min-w-12 max-w-full cursor-pointer overflow-hidden rounded bg-tranparent px-3 text-base font-medium tracking-[.03125em] hover:bg-black-30"
             >
-              <span className="mr-0 text-base font-normal -tracking-tight text-light-blue">
+              <span className="text-base font-normal -tracking-tight text-light-blue">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
-                  className="mr-[0.15em] h-[0.8em] w-[1em] group-hover:fill-[white]"
+                  className="mx-auto h-[0.8em] w-[1em] group-hover:fill-[white]"
                   viewBox="0 0 24 24"
                   fill="rgba(87, 153, 239, 1)"
                   role="presentation"
@@ -194,14 +194,14 @@ const CardMovie = ({ type, id_movie, src, title, rateAverage }) => {
             </div>
             <button
               onClick={() => handleAddRating()}
-              className="group relative inline-block min-h-8 min-w-12 max-w-full cursor-pointer overflow-hidden rounded bg-tranparent px-3 text-base font-medium tracking-[.03125em]"
+              className="group relative inline-block min-h-8 min-w-12 max-w-full cursor-pointer overflow-hidden rounded bg-tranparent px-3 text-base font-medium tracking-[.03125em] hover:bg-black-30"
             >
-              <span className="mr-0 text-base font-normal -tracking-tight text-light-blue">
+              <span className="text-base font-normal -tracking-tight text-light-blue">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"
-                  className="mr-[0.15em] h-[0.8em] w-[1em] group-hover:fill-[white]"
+                  className="mx-auto h-[0.8em] w-[1em] group-hover:fill-[white]"
                   viewBox="0 0 24 24"
                   fill="rgba(87, 153, 239, 1)"
                   role="presentation"
