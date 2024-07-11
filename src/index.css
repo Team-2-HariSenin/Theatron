@@ -50,6 +50,18 @@ body {
   }
 }
 
+.bg-banner-section {
+  background: linear-gradient(transparent 0%, transparent 65%, rgba(0, 0, 0, 0.85) 77%, rgb(0, 0, 0) 85%, rgb(0, 0, 0) 100%);
+}
+
+.bg-poster-section {
+  background: linear-gradient(0deg, transparent 0%, transparent 50%, rgba(var(--ipt-baseAlt-shade3-rgb, 18, 18, 18), 0.7) 78%, rgba(var(--ipt-baseAlt-shade3-rgb, 18, 18, 18), 1) 100%);
+}
+
+/* .swiper-wrapper { 
+  display: flex;
+} */
+
 .loader_white {
   font-size: 3px;
   width: 1em;

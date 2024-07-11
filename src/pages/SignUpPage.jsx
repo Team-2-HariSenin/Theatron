@@ -14,7 +14,9 @@ const SignUpPage = () => {
   return (
     <div className="min-h-screen bg-white">
       <div className="py-8 text-center">
-        <h1 class="font-inter text-gray-800 text-5xl font-bold">THEATRON</h1>
+        <h1 className="font-inter text-gray-800 text-5xl font-bold">
+          THEATRON
+        </h1>
       </div>
       <div className="mx-auto w-full max-w-sm">
         <form onSubmit={handleSubmit}>
@@ -71,12 +73,12 @@ const SignUpPage = () => {
           </div>
         </form>
         <div className="flex w-full flex-col justify-center">
-          <div class="relative py-2">
-            <div class="absolute inset-0 flex items-center">
-              <div class="border-gray-300 w-full border-b"></div>
+          <div className="relative py-2">
+            <div className="absolute inset-0 flex items-center">
+              <div className="border-gray-300 w-full border-b"></div>
             </div>
-            <div class="relative flex justify-center">
-              <span class="text-gray-500 bg-white px-4 text-sm">
+            <div className="relative flex justify-center">
+              <span className="text-gray-500 bg-white px-4 text-sm">
                 Already have an account?
               </span>
             </div>
