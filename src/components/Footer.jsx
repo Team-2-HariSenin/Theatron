@@ -12,16 +12,20 @@ const Footer = () => {
           <div className="flex w-full flex-col gap-5 p-4 md:w-[30%] md:p-8">
             <h1>Explore</h1>
             <button className="flex items-center gap-2">
-              <GoChevronRight /> Thrillers
+              <GoChevronRight /> 
+              <a href="https://youtube.com">Thrillers</a> 
             </button>
             <button className="flex items-center gap-2">
-              <GoChevronRight /> Action
+              <GoChevronRight /> 
+              <a href="https://youtube.com">Action</a>
             </button>
             <button className="flex items-center gap-2">
-              <GoChevronRight /> Anime
+              <GoChevronRight />
+              <a href="https://Google.com">Anime</a>
             </button>
             <button className="flex items-center gap-2">
-              <GoChevronRight /> All Category
+              <GoChevronRight />
+              <a href="https://youtube.com">All Category</a>
             </button>
           </div>
           <div className="flex w-full flex-col gap-5 p-4 md:w-[50%] md:p-8">
@@ -34,9 +38,9 @@ const Footer = () => {
               with personalized suggestions and detailed reviews.
             </p>
             <div className="flex gap-4 text-3xl">
-              <FaGithub />
-              <FaInstagram />
-              <FaLinkedin />
+              <a href="https://github.com/Team-2-HariSenin"><FaGithub /></a>
+              <a href="https://instagram.com"><FaInstagram /></a>
+              <a href="https://www.linkedin.com"><FaLinkedin /></a>
             </div>
           </div>
         </div>
