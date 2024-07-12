@@ -287,7 +287,7 @@ const Navbar = () => {
                         {[
                           { name: "Your Activity", path: "/activity" },
                           { name: "Your Watchlist", path: "/watchlist" },
-                          { name: "Account Setting", path: "/profile" },
+                          { name: "Account Setting", path: "/settings" },
                         ].map((item) => (
                           <Menu.Item key={item.name}>
                             {({ active }) => (
