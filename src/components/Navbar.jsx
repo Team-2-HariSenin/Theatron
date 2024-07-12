@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { IoIosSearch } from "react-icons/io";
+import React, { useEffect, useRef, useState } from "react";
 import { Menu, MenuButton, MenuItems, Transition } from "@headlessui/react";
 import { GoChevronDown } from "react-icons/go";
-import { BsBookmarkPlus } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import useAuthStore from "../stores/useAuthStore";
@@ -14,10 +12,12 @@ const Navbar = () => {
   const [categoryData, setCategoryData] = useState([]);
 
   const [searchInput, setSearchInput] = useState("");
-  const [searchResult, setSearchResult] = useState([]);
+  const [suggestions, setSuggestions] = useState([]);
 
   const [categoryMenu, setCategoryMenu] = useState(false);
   const [userMenu, setUserMenu] = useState(false);
+
+  const inputMobile = useRef(null);
 
   const getCategories = async () => {
     try {
@@ -33,6 +33,23 @@ const Navbar = () => {
   useEffect(() => {
     getCategories();
   }, []);
+
+  const getSuggestions = async (keyword) => {
+    try {
+      const response = await axios.get(
+        `http://127.0.0.1:3000/api/movie?keyword=${keyword}&limit=10`,
+      );
+      setSuggestions(response.data.data.movies);
+      // console.log(response.data.data.movies);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (searchInput.length < 1) return setSuggestions([]);
+    getSuggestions(searchInput);
+  }, [searchInput]);
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen((prev) => !prev);
@@ -58,7 +75,10 @@ const Navbar = () => {
             </Link>
             <div className="flex items-center gap-2 sm:hidden">
               <div
-                onClick={() => setSearchMobile(true)}
+                onClick={() => {
+                  setSearchMobile(true);
+                  inputMobile.current.focus();
+                }}
                 className="cursor-pointer rounded-full p-2 hover:bg-black-30"
               >
                 <svg
@@ -150,7 +170,7 @@ const Navbar = () => {
           <div className="hidden w-full items-center justify-between sm:flex">
             <div className="hidden flex-grow items-center gap-2 sm:flex">
               <div className="relative w-full">
-                <div className="flex max-w-[515px] items-center rounded bg-white xl:mx-auto">
+                <div className="relative flex max-w-[515px] items-center rounded bg-white xl:mx-auto">
                   <svg
                     width="17"
                     height="18"
@@ -175,6 +195,45 @@ const Navbar = () => {
                   <button className="h-full rounded-r border-l-[1px] border-l-black-90 bg-white px-4 py-1 text-sm font-semibold text-black sm:block">
                     Search
                   </button>
+                  <div className="absolute bottom-0 w-full">
+                    {suggestions.length > 0 && searchInput && (
+                      <div className="absolute z-50 mt-1 h-fit w-full bg-black-30">
+                        <ul className="block w-full">
+                          {suggestions.length > 0 && searchInput ? (
+                            suggestions.map((movie, index) => (
+                              <li>
+                                <Link
+                                  onClick={() => setSearchInput("")}
+                                  to={`/detail/${movie.id}`}
+                                  className={`flex w-full cursor-pointer ${index > 0 && "border-t"} border-t-black-40 bg-black-20 p-2 px-4 py-2 text-sm font-semibold text-black transition-all hover:bg-black-30`}
+                                >
+                                  <div className="w-12 min-w-12 items-center text-[2rem]">
+                                    <div className="relative inline-flex aspect-[23/34] w-full overflow-hidden">
+                                      <img
+                                        src={movie.url_poster}
+                                        alt={movie.name}
+                                        className="h-full w-full object-cover"
+                                      />
+                                    </div>
+                                  </div>
+                                  <div className="ml-4 flex flex-grow flex-col overflow-hidden">
+                                    <div className="block overflow-hidden text-ellipsis whitespace-nowrap text-base font-normal text-white">
+                                      {movie.name}
+                                    </div>
+                                    <div className="block overflow-hidden text-ellipsis whitespace-nowrap text-[.875rem] font-normal leading-5 text-white-70">
+                                      {movie.overview}
+                                    </div>
+                                  </div>
+                                </Link>
+                              </li>
+                            ))
+                          ) : (
+                            <></>
+                          )}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
               <Menu
@@ -404,6 +463,7 @@ const Navbar = () => {
       >
         <input
           className="h-full w-full bg-tranparent focus:border-none focus:outline-none"
+          ref={inputMobile}
           value={searchInput}
           onChange={(e) => setSearchInput(e.target.value)}
           placeholder="search..."
@@ -426,6 +486,50 @@ const Navbar = () => {
             <path d="M18.3 5.71a.996.996 0 0 0-1.41 0L12 10.59 7.11 5.7A.996.996 0 1 0 5.7 7.11L10.59 12 5.7 16.89a.996.996 0 1 0 1.41 1.41L12 13.41l4.89 4.89a.996.996 0 1 0 1.41-1.41L13.41 12l4.89-4.89c.38-.38.38-1.02 0-1.4z"></path>
           </svg>
         </button>
+        <div
+          className={`absolute ${searchMobile ? "block" : "hidden"} bottom-0 w-full`}
+        >
+          {suggestions.length > 0 && searchInput && (
+            <div className="absolute z-50 h-fit w-full bg-black-30">
+              <ul className="block w-full">
+                {suggestions.length > 0 && searchInput ? (
+                  suggestions.map((movie, index) => (
+                    <li>
+                      <Link
+                        onClick={() => {
+                          setSearchInput("");
+                          setSearchMobile(false);
+                        }}
+                        to={`/detail/${movie.id}`}
+                        className={`flex w-full cursor-pointer ${index > 0 && "border-t"} border-t-black-40 bg-black-20 p-2 px-4 py-2 text-sm font-semibold text-black transition-all hover:bg-black-30`}
+                      >
+                        <div className="w-12 min-w-12 items-center text-[2rem]">
+                          <div className="relative inline-flex aspect-[23/34] w-full overflow-hidden">
+                            <img
+                              src={movie.url_poster}
+                              alt={movie.name}
+                              className="h-full w-full object-cover"
+                            />
+                          </div>
+                        </div>
+                        <div className="ml-4 flex flex-grow flex-col overflow-hidden">
+                          <div className="block overflow-hidden text-ellipsis whitespace-nowrap text-base font-normal text-white">
+                            {movie.name}
+                          </div>
+                          <div className="block overflow-hidden text-ellipsis whitespace-nowrap text-[.875rem] font-normal leading-5 text-white-70">
+                            {movie.overview}
+                          </div>
+                        </div>
+                      </Link>
+                    </li>
+                  ))
+                ) : (
+                  <></>
+                )}
+              </ul>
+            </div>
+          )}
+        </div>
       </div>
     </nav>
   );
