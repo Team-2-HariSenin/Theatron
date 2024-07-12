@@ -49,7 +49,7 @@ const router = createBrowserRouter(
         <Route path="watchlist" element={<ProtectedRoute />}>
           <Route index element={<WatchList />} />
         </Route>
-        <Route path="detail" element={<MovieDetail />} />
+        <Route path="detail/:id" element={<MovieDetail />} />
         <Route path="/category/:id" element={<Category />} />
         <Route path="/writer/:id" element={<Writer />} />
         <Route path="/star/:id" element={<Star />} />
