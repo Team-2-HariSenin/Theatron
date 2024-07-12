@@ -77,7 +77,7 @@ const SignInPage = () => {
           <p className="mb-2 text-center">
             <button
               type="submit"
-              className="border-gray-700 w-full rounded-xl border bg-yellow px-1 py-2 text-sm text-black"
+              className="border-gray-700 w-full rounded-xl border bg-yellow px-1 py-2 text-sm text-black hover:bg-light-blue"
             >
               Sign In
             </button>
@@ -104,7 +104,7 @@ const SignInPage = () => {
         <Link to={"/signup"} className="item mt-2 flex w-full justify-center">
           <button
             type="submit"
-            className="bg-gray-100 border-gray-700 w-3/4 rounded-xl border py-2 text-sm text-black"
+            className="bg-gray-100 border-gray-700 w-3/4 rounded-xl border py-2 text-sm text-black  hover:bg-black-40"
           >
             Create your THEATRON account
           </button>
