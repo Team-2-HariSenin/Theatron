@@ -23,6 +23,7 @@ export default {
       "light-blue": "rgba(87, 153, 239, 1)",
       "icon-hover": "rgba(255, 255, 255, 0.32)",
       "icon-hover-yellow": "rgba(0, 0, 0, 0.32)",
+      red: "rgba(255, 0, 0)",
       tranparent: "transparent",
     },
     screens: {
@@ -31,7 +32,6 @@ export default {
       md: "768px",
       lg: "1024px",
       xl: "1280px",
-      "2xl": "1536px",
     },
   },
   plugins: [],

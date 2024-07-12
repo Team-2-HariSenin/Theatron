@@ -3,26 +3,26 @@ import CardMovie from "../components/CardMovie";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 
-const Category = () => {
+const Director = () => {
   const { id } = useParams();
 
-  const [categoryData, setCategoryData] = useState([]);
-  const [categoryName, setCategoryName] = useState("");
+  const [directorData, setDirectorData] = useState([]);
+  const [directorName, setDirectorName] = useState("");
 
-  const getMovieByCategory = async () => {
+  const getMovieByDirector = async () => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:3000/api/movie/category/${id}`,
+        `http://127.0.0.1:3000/api/movie/director/${id}`,
       );
-      setCategoryData(response.data.data.movies);
-      setCategoryName(response.data.data.name);
+      setDirectorData(response.data.data.movies);
+      setDirectorName(response.data.data.name);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
   useEffect(() => {
-    getMovieByCategory();
+    getMovieByDirector();
   }, [id]);
 
   return (
@@ -39,7 +39,7 @@ const Category = () => {
               <rect width="4" height="28" rx="2" fill="#F5C518" />
             </svg>
           </span>{" "}
-          {categoryName}
+          {`${directorName}'s Movie`}
         </h3>
       </div>
 
@@ -47,16 +47,16 @@ const Category = () => {
         {/* Card Movie */}
         <div className="hide-scrollbar m-h-[4em] relative grid snap-mandatory grid-cols-4 gap-4 px-4 xs:grid-cols-6 md:grid-cols-8 lg:grid-cols-12 lg:gap-4 xl:gap-6">
           {" "}
-          {categoryData.map((category, index) => (
+          {directorData.map((director, index) => (
             <div
-              key={category.id}
+              key={director.id}
               className="relative col-span-2 mb-1 mr-0 inline-flex w-full min-w-full snap-start flex-col gap-2 rounded bg-black-20 pb-4 text-base font-normal"
             >
               <CardMovie
-                id_movie={category.id}
-                src={category.url_poster}
-                title={category.name}
-                rateAverage={Number(category.rate_average)}
+                id_movie={director.id}
+                src={director.url_poster}
+                title={director.name}
+                rateAverage={Number(director.rate_average)}
               />
             </div>
           ))}
@@ -66,4 +66,4 @@ const Category = () => {
   );
 };
 
-export default Category;
+export default Director;

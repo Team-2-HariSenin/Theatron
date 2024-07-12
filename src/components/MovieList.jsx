@@ -1,40 +1,42 @@
 import React, { useRef, useState, useEffect } from "react";
 import CardMovie from "./CardMovie";
+import axios from "axios";
 
-const MovieList = () => {
-  const cardMovie = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
+const MovieList = ({ categoryId }) => {
+  const [movieData, setMovieData] = useState([]);
+  const [title, setTitle] = useState("");
+
+  const getCategories = async () => {
+    try {
+      const response = await axios.get(
+        `http://127.0.0.1:3000/api/movie/all-category?id_category=${categoryId}`,
+      );
+      setTitle(response.data.data.categories[0].name);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  const getMovies = async () => {
+    try {
+      const response = await axios.get(
+        `http://127.0.0.1:3000/api/movie/category/${categoryId}?limit=10`,
+      );
+      setMovieData(response.data.data.movies);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
+
+  useEffect(() => {
+    getCategories();
+    getMovies();
+  }, []);
 
   const elementRef = useRef(null);
-  const cardRefs = useRef([]);
-  const [entriesCard, setEntriesCard] = useState([]);
   const [leftArrowDisable, setLeftArrowDisable] = useState(true);
   const [rightArrowDisable, setRightArrowDisable] = useState(false);
   const [distance, setDistance] = useState(0);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      const status = cardRefs.current.map((ref, index) => {
-        const entry = entries.find((e) => e.target === ref);
-        return `index: ${index} is ${entry ? entry.isIntersecting : "not observed"}`;
-      });
-      console.log(status);
-    });
-
-    cardRefs.current.forEach((ref) => {
-      if (ref) {
-        observer.observe(ref);
-      }
-    });
-
-    return () => {
-      // Cleanup the observer on component unmount
-      cardRefs.current.forEach((ref) => {
-        if (ref) {
-          observer.unobserve(ref);
-        }
-      });
-    };
-  }, []);
 
   const calculateDistance = () => {
     if (elementRef.current) {
@@ -57,9 +59,7 @@ const MovieList = () => {
       const calculatedDistance =
         elementRef.current.clientWidth -
         (elementRef.current.clientWidth - elementWidth);
-      console.log("element", elementWidth);
       setDistance(calculatedDistance);
-      console.log(calculatedDistance); // Debugging: Check the calculated distance
     }
   };
 
@@ -118,7 +118,7 @@ const MovieList = () => {
   }, []);
 
   return (
-    <div className="mx-auto flex w-full flex-col bg-black-10 py-5 lg:w-[1024px] xl:w-[1280px]">
+    <div className="mx-auto flex w-full flex-col bg-black-10 py-5 lg:container">
       <div className="relative mb-4 w-full align-baseline text-xl font-semibold leading-[1.2em] tracking-[0.0125em] text-white">
         <h3 className="m-h-[2.4em] relative flex items-center gap-2 overflow-hidden pl-3 text-xl leading-[29px] text-white sm:text-2xl">
           <span>
@@ -131,7 +131,7 @@ const MovieList = () => {
               <rect width="4" height="28" rx="2" fill="#F5C518" />
             </svg>
           </span>{" "}
-          Indonesia Movies & TV
+          {title}
         </h3>
       </div>
 
@@ -157,13 +157,17 @@ const MovieList = () => {
           className="custom-grid-auto-columns hide-scrollbar m-h-[4em] relative grid snap-mandatory grid-flow-col gap-2 overflow-auto px-4 lg:gap-4 xl:gap-6"
         >
           {" "}
-          {cardMovie.map((item, index) => (
+          {movieData.map((movie) => (
             <div
-              key={index}
-              ref={(el) => (cardRefs.current[index] = el)}
+              key={movie.id}
               className="relative col-span-2 mb-1 mr-0 inline-flex w-full min-w-full snap-start flex-col gap-2 rounded bg-black-20 pb-4 text-base font-normal"
             >
-              <CardMovie />
+              <CardMovie
+                id_movie={movie.id}
+                src={movie.url_poster}
+                title={movie.name}
+                rateAverage={Number(movie.rate_average)}
+              />
             </div>
           ))}
         </div>

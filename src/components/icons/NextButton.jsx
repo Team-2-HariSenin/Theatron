@@ -1,10 +1,14 @@
 import React from "react";
 
-const NextButton = () => {
+const NextButton = ({ onClick }) => {
   return (
-    <div className="absolute right-0 top-1/4 z-40 rounded border border-white px-3 py-5 align-baseline text-2xl leading-[0]">
+    <div
+      onClick={onClick}
+      className="absolute right-4 top-1/2 z-40 -translate-y-1/2 cursor-pointer rounded border border-white px-3 py-5 text-2xl leading-none hover:text-yellow"
+      aria-label="Next Movie"
+    >
       <svg
-        className="h-[1em] w-[1em] overflow-hidden fill-white align-baseline text-2xl leading-[0] tracking-[0.3125em]"
+        className="h-6 w-6 fill-white hover:fill-yellow"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
         role="presentation"
