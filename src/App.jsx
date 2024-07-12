@@ -40,6 +40,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import Writer from "./pages/Writer";
 import Star from "./pages/Star";
 import Director from "./pages/Director";
+import Profile from "./pages/Profile";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -49,7 +50,10 @@ const router = createBrowserRouter(
         <Route path="watchlist" element={<ProtectedRoute />}>
           <Route index element={<WatchList />} />
         </Route>
-        <Route path="detail" element={<MovieDetail />} />
+        <Route path="profile" element={<ProtectedRoute />}>
+          <Route index element={<Profile />} />
+        </Route>
+        <Route path="detail/:id" element={<MovieDetail />} />
         <Route path="/category/:id" element={<Category />} />
         <Route path="/writer/:id" element={<Writer />} />
         <Route path="/star/:id" element={<Star />} />

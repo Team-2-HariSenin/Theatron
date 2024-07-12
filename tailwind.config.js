@@ -20,6 +20,7 @@ export default {
       "black-40": "rgba(117, 117, 117, 1)",
       "black-90": "rgba(33, 33, 33, 0.9)",
       yellow: "rgba(245, 197, 24, 1)",
+      green: "rgba(0, 255, 0, 1)",
       "light-blue": "rgba(87, 153, 239, 1)",
       "icon-hover": "rgba(255, 255, 255, 0.32)",
       "icon-hover-yellow": "rgba(0, 0, 0, 0.32)",

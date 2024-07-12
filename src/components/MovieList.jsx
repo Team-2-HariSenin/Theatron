@@ -6,6 +6,7 @@ const MovieList = ({ categoryId }) => {
   const [movieData, setMovieData] = useState([]);
   const [title, setTitle] = useState("");
 
+
   const getCategories = async () => {
     try {
       const response = await axios.get(
@@ -32,6 +33,8 @@ const MovieList = ({ categoryId }) => {
     getCategories();
     getMovies();
   }, []);
+
+
 
   const elementRef = useRef(null);
   const [leftArrowDisable, setLeftArrowDisable] = useState(true);
@@ -118,7 +121,7 @@ const MovieList = ({ categoryId }) => {
   }, []);
 
   return (
-    <div className="mx-auto flex w-full flex-col bg-black-10 py-5 lg:container">
+    <div className="mx-auto flex w-full flex-col py-5 lg:container">
       <div className="relative mb-4 w-full align-baseline text-xl font-semibold leading-[1.2em] tracking-[0.0125em] text-white">
         <h3 className="m-h-[2.4em] relative flex items-center gap-2 overflow-hidden pl-3 text-xl leading-[29px] text-white sm:text-2xl">
           <span>
