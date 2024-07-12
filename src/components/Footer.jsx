@@ -3,6 +3,8 @@ import { FaGithub } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import { FaLinkedin } from "react-icons/fa";
 import { GoChevronRight } from "react-icons/go";
+import { Link } from "react-router-dom";
+
 
 const Footer = () => {
   return (
@@ -13,19 +15,19 @@ const Footer = () => {
             <h1>Explore</h1>
             <button className="flex items-center gap-2">
               <GoChevronRight /> 
-              <a href="https://youtube.com">Thrillers</a> 
+              <Link to="/category/1">Drama</Link>
             </button>
             <button className="flex items-center gap-2">
               <GoChevronRight /> 
-              <a href="https://youtube.com">Action</a>
+              <Link to="/category/2">Romance</Link>
             </button>
             <button className="flex items-center gap-2">
               <GoChevronRight />
-              <a href="https://Google.com">Anime</a>
+              <Link to="/category/3">Horor</Link>
             </button>
             <button className="flex items-center gap-2">
               <GoChevronRight />
-              <a href="https://youtube.com">All Category</a>
+              <Link to="/category/4">Commedy</Link>
             </button>
           </div>
           <div className="flex w-full flex-col gap-5 p-4 md:w-[50%] md:p-8">
