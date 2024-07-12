@@ -286,8 +286,13 @@ const Navbar = () => {
                       <div className="py-1">
                         {[
                           { name: "Your Activity", path: "/activity" },
-                          { name: "Your Watchlist", path: "/watchlist" },
+<<<<<<<<< Temporary merge branch 1
+                          { name: "Your Watchlista", path: "/watchlist" },
                           { name: "Account Setting", path: "/settings" },
+=========
+                          { name: "Your Watchlist", path: "/watchlist" },
+                          { name: "Account Setting", path: "/profile" },
+>>>>>>>>> Temporary merge branch 2
                         ].map((item) => (
                           <Menu.Item key={item.name}>
                             {({ active }) => (

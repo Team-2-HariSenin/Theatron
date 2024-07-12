@@ -50,7 +50,14 @@ const router = createBrowserRouter(
         <Route path="watchlist" element={<ProtectedRoute />}>
           <Route index element={<WatchList />} />
         </Route>
+<<<<<<<<< Temporary merge branch 1
+        <Route path="detail/:id" element={<MovieDetail />} />
+=========
+        <Route path="profile" element={<ProtectedRoute />}>
+          <Route index element={<Profile />} />
+        </Route>
         <Route path="detail" element={<MovieDetail />} />
+>>>>>>>>> Temporary merge branch 2
         <Route path="/category/:id" element={<Category />} />
         <Route path="/writer/:id" element={<Writer />} />
         <Route path="/star/:id" element={<Star />} />
