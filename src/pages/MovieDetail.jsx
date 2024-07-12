@@ -2,22 +2,23 @@ import React from "react";
 import videoTrailer from "../assets/images/videoTrailer.jpg";
 import cardMovie from "../assets/images/card.png";
 import trailer from "../assets/images/trailer.png";
+import Main2 from "../components/Main2";
 
 const MovieDetail = () => {
   return (
     <>
-      {/* Movie Detail */}
-      <section className="w-[100vw] bg-black">
-        <div className="px-2">
-          <div className="flex justify-center pt-10 min-[1440px]:gap-5">
-            <div className="movie w-full min-[1440px]:w-[1000px]">
+      {/* Movie Detail
+      <section className="w-full bg-black">
+        <div className="mx-auto px-2 lg:container">
+          <section className="relative col-auto flex max-w-screen-xl justify-center">
+            <div className="relative mx-2 aspect-video w-full flex-shrink flex-grow-[664] basis-[0%] overflow-hidden xl:flex-grow-[864]">
               <img
-                className="max-h-[554px] w-full min-[1440px]:h-[610px] min-[1440px]:w-[1000px]"
+                className="h-full w-full object-cover"
                 src={videoTrailer}
                 alt=""
               />
             </div>
-            <div className="hidden w-[425px] min-[1440px]:block">
+            <div className="jus relative ml-1 mr-2 hidden flex-shrink flex-grow-[328] basis-[0%] flex-col lg:flex xl:flex-grow-[402]">
               <h1 className="text-2xl font-medium text-[#F5C518]">Trailer</h1>
               <div className="mt-6 bg-[#0c0c0c] p-4">
                 <div className="containerTrailerCard h-[530px] overflow-x-scroll text-[#f6f6f6]">
@@ -108,9 +109,9 @@ const MovieDetail = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </section>
 
-          <div className="playNext px-2 min-[1440px]:hidden">
+          <div className="playNext hidden px-2">
             <h1 className="py-2 text-xl font-semibold leading-5 text-[#F5C518]">
               Play next
             </h1>
@@ -314,7 +315,8 @@ const MovieDetail = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
+      <Main2 />
     </>
   );
 };

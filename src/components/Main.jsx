@@ -113,7 +113,7 @@ const Main = () => {
   };
 
   return (
-    <main className="lg: mx-auto mt-9 grid w-full grid-cols-[100%] justify-stretch px-2 lg:container">
+    <main className="mx-auto mt-9 grid w-full grid-cols-[100%] justify-stretch px-2 lg:container">
       <div className="relative col-auto flex max-w-screen-xl justify-center">
         {/* Section Movie Preview */}
         <section className="relative mx-2 flex-shrink flex-grow-[664] basis-[0%] overflow-hidden xl:flex-grow-[864]">
