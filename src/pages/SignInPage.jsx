@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuthStore from "../stores/useAuthStore";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
 const SignInPage = () => {
   const [email, setEmail] = useState("");
@@ -19,8 +20,11 @@ const SignInPage = () => {
           password,
         },
       );
-      const { token, isAdmin } = response.data.data;
-      login(token, isAdmin);
+      const { token } = response.data.data;
+      const user = jwtDecode(token);
+      const isAdmin = user.isAdmin;
+      login(user, token, isAdmin);
+      localStorage.setItem("user", JSON.stringify(user));
       localStorage.setItem("token", token);
       localStorage.setItem("isAdmin", isAdmin);
 

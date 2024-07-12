@@ -286,7 +286,7 @@ const Navbar = () => {
                       <div className="py-1">
                         {[
                           { name: "Your Activity", path: "/activity" },
-                          { name: "Your Watchlist", path: "/watchlist" },
+                          { name: "Your Watchlista", path: "/watchlist" },
                           { name: "Account Setting", path: "/settings" },
                         ].map((item) => (
                           <Menu.Item key={item.name}>
