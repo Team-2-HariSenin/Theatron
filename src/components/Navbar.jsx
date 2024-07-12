@@ -116,7 +116,7 @@ const Navbar = () => {
                         {[
                           { name: "Your Activity", path: "/activity" },
                           { name: "Your Watchlist", path: "/watchlist" },
-                          { name: "Account Setting", path: "/settings" },
+                          { name: "Account Setting", path: "/profile" },
                         ].map((item) => (
                           <Menu.Item key={item.name}>
                             {({ active }) => (
@@ -345,8 +345,8 @@ const Navbar = () => {
                       <div className="py-1">
                         {[
                           { name: "Your Activity", path: "/activity" },
-                          { name: "Your Watchlista", path: "/watchlist" },
-                          { name: "Account Setting", path: "/settings" },
+                          { name: "Your Watchlist", path: "/watchlist" },
+                          { name: "Account Setting", path: "/profile" },
                         ].map((item) => (
                           <Menu.Item key={item.name}>
                             {({ active }) => (
@@ -439,7 +439,7 @@ const Navbar = () => {
                   <Link to="/activity">Your Activity</Link>
                 </li>
                 <li className="block px-4 py-2 text-sm hover:text-white active:text-white">
-                  <Link to="/settings">Account Setting</Link>
+                  <Link to="/profile">Account Setting</Link>
                 </li>
                 <li className="block w-full px-4 py-2 text-left text-sm hover:text-white active:text-white">
                   <button type="submit" onClick={() => logout()}>
@@ -477,7 +477,7 @@ const Navbar = () => {
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
-            className="ipc-icon ipc-icon--clear"
+            class="ipc-icon ipc-icon--clear"
             viewBox="0 0 24 24"
             fill="currentColor"
             role="presentation"
