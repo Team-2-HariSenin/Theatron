@@ -3,7 +3,7 @@ import { Outlet, Navigate } from "react-router-dom";
 import useAuthStore from "../stores/useAuthStore";
 
 const ProtectedRoute = ({ isAdminRoute = false }) => {
-  const { isAuthenticated, isAdmin, isInitializing } = useAuthStore(
+  const { isAuthenticated, isAdmin, isInitializing, logout } = useAuthStore(
     (state) => state,
   );
 
@@ -12,6 +12,11 @@ const ProtectedRoute = ({ isAdminRoute = false }) => {
   }
 
   if (!isAuthenticated) {
+    return <Navigate to="/signin" replace />;
+  }
+
+  if (!isAdminRoute && isAdmin) {
+    logout();
     return <Navigate to="/signin" replace />;
   }
 

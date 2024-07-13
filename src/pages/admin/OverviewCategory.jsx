@@ -3,12 +3,15 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaTrashCan } from "react-icons/fa6";
 import { FaEdit } from "react-icons/fa";
+import useAuthStore from "../../stores/useAuthStore";
 
 const OverviewCategory = () => {
   const [searchInput, setSearchInput] = useState("");
   const [categoryData, setCategoryData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+
+  const { token } = useAuthStore((state) => state);
 
   const getCategories = async (keyword = "", page = 1) => {
     try {
@@ -31,6 +34,27 @@ const OverviewCategory = () => {
   const handleSearch = () => {
     setCurrentPage(1);
     getCategories(searchInput, 1);
+  };
+
+  const deleteCategory = async (id) => {
+    try {
+      const response = await axios.delete(
+        `http://127.0.0.1:3000/api/admin/delete-category/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      window.location.reload();
+    } catch (error) {
+      console.error("Error deleting data:", error);
+    }
+  };
+
+  const handleDelete = (id) => {
+    confirm("Do you really want to delete this category?") &&
+      deleteCategory(id);
   };
 
   return (
@@ -112,7 +136,10 @@ const OverviewCategory = () => {
                       >
                         <FaEdit size={26} />
                       </Link>
-                      <button className="text-blue-600 font-medium hover:underline">
+                      <button
+                        onClick={() => handleDelete(category.id)}
+                        className="text-blue-600 font-medium hover:underline"
+                      >
                         <FaTrashCan size={21} />
                       </button>
                     </td>

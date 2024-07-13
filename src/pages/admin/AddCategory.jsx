@@ -25,6 +25,7 @@ const AddCategory = () => {
         },
       );
       console.log(response.data.message);
+      setName("");
     } catch (error) {
       console.error("Error adding category:", error);
       setLoading(false); // Set loading to false if there's an error

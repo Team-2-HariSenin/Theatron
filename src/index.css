@@ -56,9 +56,17 @@ body {
   background: linear-gradient(0deg, transparent 0%, transparent 50%, rgba(var(--ipt-baseAlt-shade3-rgb, 18, 18, 18), 0.7) 78%, rgba(var(--ipt-baseAlt-shade3-rgb, 18, 18, 18), 1) 100%);
 }
 
-/* .swiper-wrapper { 
-  display: flex;
-} */
+.bullet::before {
+      display: inline-block;
+      margin: 0 .5rem .2rem;
+      content: "";
+      font-size: 1rem;
+      line-height: .5rem;
+      padding: 1px;
+      border-radius: 50%;
+      vertical-align: middle;
+      background-color: white;
+}
 
 .loader_white {
   font-size: 3px;

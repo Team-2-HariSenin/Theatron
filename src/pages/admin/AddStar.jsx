@@ -26,6 +26,8 @@ const AddStar = () => {
         },
       );
       console.log(response.data.message);
+      setName("");
+
     } catch (error) {
       console.error("Error adding star:", error);
       setLoading(false); // Set loading to false if there's an error
