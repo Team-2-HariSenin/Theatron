@@ -1,14 +1,63 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const SignUpPage = () => {
   const [firstName, setFirstName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+  const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const validatePassword = (password) => {
+    if (password.length < 8) {
+      return "Password must be at least 8 characters long.";
+    }
+    if (!/[a-z]/.test(password)) {
+      return "Password must contain at least one lowercase letter.";
+    }
+    if (!/[A-Z]/.test(password)) {
+      return "Password must contain at least one uppercase letter.";
+    }
+    if (!/[0-9]/.test(password)) {
+      return "Password must contain at least one number.";
+    }
+    return "";
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Implement sign up logic here (e.g., API call, data validation)
+    const passwordValidationError = validatePassword(password);
+    if (passwordValidationError) {
+      setPasswordError(passwordValidationError);
+      return;
+    }
+    setLoading(true);
+    setError("");
+    setPasswordError("");
+    try {
+      const response = await axios.post("http://localhost:3000/api/auth/register", {
+        name: firstName,
+        email,
+        password,
+      });
+      console.log("Registration response:", response.data);
+      if (response.data.message === "User successfully registered") {
+        navigate("/signin");
+      } else {
+        setError(response.data.message || "Registration failed. Please try again.");
+      }
+    } catch (error) {
+      console.error("Registration failed", error);
+      setError(
+        error.response?.data?.message || "Registration failed. Please try again."
+      );
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -22,6 +71,7 @@ const SignUpPage = () => {
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <p className="text-gray-800 text-3xl">Create account</p>
+            {error && <p className="text-red-500 text-sm">{error}</p>}
             <label htmlFor="firstName" className="text-gray-700 block"></label>
             <input
               placeholder="First and Last Name"
@@ -30,6 +80,7 @@ const SignUpPage = () => {
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               className="focus:border-sky-500 focus:ring-sky-500 mt-1 w-full rounded-md border px-3 py-2 focus:outline-none focus:ring"
+              required
             />
           </div>
           <div className="mb-4">
@@ -41,33 +92,43 @@ const SignUpPage = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="focus:border-sky-500 focus:ring-sky-500 mt-1 w-full rounded-md border px-3 py-2 focus:outline-none focus:ring"
+              required
             />
           </div>
           <div className="mb-2">
             <label htmlFor="password" className="text-gray-700 block"></label>
             <input
               placeholder="Create Password"
-              type="password"
+              type={showPassword ? "text" : "password"}
               id="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="focus:border-sky-500 focus:ring-sky-500 mt-1 w-full rounded-md border px-3 py-2 focus:outline-none focus:ring"
+              required
             />
+            {passwordError && <p className="text-red-500 text-sm">{passwordError}</p>}
           </div>
           <div className="py-2">
             <p className="text-gray-900 font-inter">
-              i Password must be at least 8 characters.
+              Password must be at least 8 characters.
             </p>
           </div>
           <button
             type="submit"
-            className="w-full rounded-xl border bg-yellow px-4 py-2 text-black"
+            className="w-full rounded-xl border bg-yellow px-4 py-2 text-black hover:bg-light-blue"
+            disabled={loading}
           >
-            Create Your THEATRON Account
+            {loading ? "Creating account..." : "Create Your THEATRON Account"}
           </button>
           <div className="flex items-center py-2">
-            <input type="checkbox" id="rememberMe" className="mr-2" />
-            <label htmlFor="rememberMe" className="text-gray-700">
+            <input
+              type="checkbox"
+              id="showPassword"
+              className="mr-2"
+              checked={showPassword}
+              onChange={() => setShowPassword(!showPassword)}
+            />
+            <label htmlFor="showPassword" className="text-gray-700">
               Show Password
             </label>
           </div>
@@ -84,7 +145,7 @@ const SignUpPage = () => {
             </div>
           </div>
           <Link to={"/signin"} className="text-center">
-            <button className="bg-gray-100 w-3/4 rounded-xl border py-2 text-sm text-black">
+            <button className="bg-gray-100 w-3/4 rounded-xl border py-2 text-sm text-black hover:bg-black-40">
               Sign In
             </button>
           </Link>
