@@ -22,6 +22,11 @@ const AddMovie = () => {
   const [starInput, setStarInput] = useState("");
   const [categoryInput, setCategoryInput] = useState("");
 
+  const [inputImageBy, setInputImageBy] = useState("text");
+
+  const [urlBannerInput, setUrlBannerInput] = useState("");
+  const [urlPosterInput, setUrlPosterInput] = useState("");
+
   const [dataDirector, setDataDirector] = useState([]);
   const [dataWriter, setDataWriter] = useState([]);
   const [dataStar, setDataStar] = useState([]);
@@ -158,11 +163,19 @@ const AddMovie = () => {
     const newMovie = {
       name,
       overview,
-      director: director.id,
+      director: director ? director.id : null,
       writer: writer.map((writer) => writer.id),
       star: star.map((star) => star.id),
       category: category.map((category) => category.id),
     };
+
+    if (urlBannerInput && inputImageBy === "text") {
+      newMovie.url_image = urlBannerInput;
+    }
+
+    if (urlPosterInput && inputImageBy === "text") {
+      newMovie.url_poster = urlPosterInput;
+    }
 
     try {
       const response = await axios.post(
@@ -178,6 +191,9 @@ const AddMovie = () => {
       console.log(response.data.message);
       const idMovie = response.data.data.id;
       await addTrailer(idMovie);
+      if (banner && poster && inputImageBy === "file") {
+        await addImage(idMovie);
+      }
       await addImage(idMovie);
     } catch (error) {
       console.error("Error adding movie:", error);
@@ -448,18 +464,61 @@ const AddMovie = () => {
               </div>
             </div>
           </div>
+          {/* add image */}
+
+          <label className="font-semibold text-black-30" htmlFor="movieWriter">
+            Input Image By
+          </label>
+
+          <select
+            id="inputImageBy"
+            value={inputImageBy}
+            onChange={(e) => setInputImageBy(e.target.value)}
+            className="w-full cursor-pointer rounded border border-black-30 p-2 text-black-30"
+          >
+            <option value="text">Text</option>
+            <option value="file">File</option>
+          </select>
+
           <h2 className="font-semibold text-black-30">Add Movie Banner</h2>
-          <input
-            type="file"
-            onChange={onChangeHandlerFile(setBanner)}
-            className="w-full cursor-pointer rounded border border-black-30 p-2 text-black-30 placeholder:italic placeholder:text-black-30"
-          />
+          {inputImageBy === "text" ? (
+            <input
+              type="text"
+              id="movieWriter"
+              value={urlBannerInput}
+              onChange={(e) => setUrlBannerInput(e.target.value)}
+              placeholder="Search Star..."
+              className="w-full cursor-pointer rounded border border-black-30 p-2 text-black-30 placeholder:italic placeholder:text-black-30"
+            />
+          ) : (
+            inputImageBy === "file" && (
+              <input
+                type="file"
+                onChange={onChangeHandlerFile(setBanner)}
+                className="w-full cursor-pointer rounded border border-black-30 p-2 text-black-30 placeholder:italic placeholder:text-black-30"
+              />
+            )
+          )}
+
           <h3 className="font-semibold text-black-30">Add Movie Poster</h3>
-          <input
-            type="file"
-            onChange={onChangeHandlerFile(setPoster)}
-            className="w-full cursor-pointer rounded border border-black-30 p-2 text-black-30 placeholder:italic placeholder:text-black-30"
-          />
+          {inputImageBy === "text" ? (
+            <input
+              type="text"
+              id="movieWriter"
+              value={urlPosterInput}
+              onChange={(e) => setUrlPosterInput(e.target.value)}
+              placeholder="Search Star..."
+              className="w-full cursor-pointer rounded border border-black-30 p-2 text-black-30 placeholder:italic placeholder:text-black-30"
+            />
+          ) : (
+            inputImageBy === "file" && (
+              <input
+                type="file"
+                onChange={onChangeHandlerFile(setPoster)}
+                className="w-full cursor-pointer rounded border border-black-30 p-2 text-black-30 placeholder:italic placeholder:text-black-30"
+              />
+            )
+          )}
           <button
             type="submit"
             disabled={loading}

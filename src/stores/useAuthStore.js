@@ -17,6 +17,7 @@ const useAuthStore = create((set) => ({
     localStorage.removeItem("token");
     localStorage.removeItem("isAdmin");
     set({
+      user: null,
       isAuthenticated: false,
       isAdmin: false,
       token: null,
@@ -26,8 +27,15 @@ const useAuthStore = create((set) => ({
   initializeAuth: () => {
     const token = localStorage.getItem("token");
     const isAdmin = localStorage.getItem("isAdmin") === "true";
+    const user = JSON.parse(localStorage.getItem("user"));
     if (token) {
-      set({ isAuthenticated: true, isAdmin, token, isInitializing: false });
+      set({
+        isAuthenticated: true,
+        isAdmin,
+        user,
+        token,
+        isInitializing: false,
+      });
     } else {
       set({ isInitializing: false });
     }

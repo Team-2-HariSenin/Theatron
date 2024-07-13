@@ -60,7 +60,7 @@ const OverviewStar = () => {
       <div className="mt-10 flex h-full w-full flex-col gap-3 overflow-y-auto">
         <div className="flex justify-between gap-5">
           <Link
-            to={"/admin/categories/add"}
+            to={"/admin/stars/add"}
             className="relative flex w-fit items-center justify-center text-nowrap rounded border border-black-30 bg-yellow px-3 text-black-30"
           >
             Add Star

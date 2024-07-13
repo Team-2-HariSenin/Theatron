@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Menu, MenuButton, MenuItems, Transition } from "@headlessui/react";
-import { GoChevronDown } from "react-icons/go";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { Link } from "react-router-dom";
 import useAuthStore from "../stores/useAuthStore";
@@ -55,7 +54,7 @@ const Navbar = () => {
     setIsMobileMenuOpen((prev) => !prev);
   };
 
-  const { isAuthenticated, logout } = useAuthStore((state) => state);
+  const { isAuthenticated, logout, user } = useAuthStore((state) => state);
 
   const classNames = (...classes) => classes.filter(Boolean).join(" ");
 
@@ -96,12 +95,22 @@ const Navbar = () => {
               </div>
               {isAuthenticated ? (
                 <Menu as="div" className="relative inline-block text-left">
-                  <MenuButton className="inline-flex justify-center gap-x-1.5 bg-customColorNavbar px-3 py-2 text-sm text-white">
-                    <span className="font text-sm font-semibold">User</span>
-                    <GoChevronDown
-                      className="text-gray-400 -mr-1 h-5 w-5"
-                      aria-hidden="true"
-                    />
+                  <MenuButton className="inline-flex items-center justify-center gap-x-1.5 bg-customColorNavbar px-3 py-2 text-sm text-white hover:bg-black-30">
+                    <span className="font text-sm font-semibold">
+                      {user && user.name}
+                    </span>
+                    <svg
+                      width="14"
+                      height="10"
+                      viewBox="0 0 14 10"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M6.01118 8.7899C6.55783 9.33655 7.44558 9.33655 7.99223 8.7899L13.5899 3.19224C13.9922 2.78991 14.1103 2.19078 13.8916 1.666C13.673 1.14122 13.1657 0.800111 12.5972 0.800111L1.40185 0.80011C0.837712 0.80011 0.326051 1.14122 0.107391 1.666C-0.111267 2.19078 0.0111814 2.78991 0.40914 3.19224L6.00681 8.7899L6.01118 8.7899Z"
+                        fill="#F6F6F6"
+                      />
+                    </svg>
                   </MenuButton>
                   <Transition
                     enter="transition ease-out duration-100"
@@ -201,7 +210,7 @@ const Navbar = () => {
                         <ul className="block w-full">
                           {suggestions.length > 0 && searchInput ? (
                             suggestions.map((movie, index) => (
-                              <li>
+                              <li key={movie.id}>
                                 <Link
                                   onClick={() => setSearchInput("")}
                                   to={`/detail/${movie.id}`}
@@ -318,8 +327,10 @@ const Navbar = () => {
               </Link>
               {isAuthenticated ? (
                 <Menu as="div" className="relative inline-block text-left">
-                  <MenuButton className="inline-flex items-center justify-center gap-x-1.5 bg-customColorNavbar px-3 py-2 text-sm text-white">
-                    <span className="font text-sm font-semibold">User</span>
+                  <MenuButton className="inline-flex items-center justify-center gap-x-1.5 bg-customColorNavbar px-3 py-2 text-sm text-white hover:bg-black-30">
+                    <span className="font text-sm font-semibold">
+                      {user && user.name}
+                    </span>
                     <svg
                       width="14"
                       height="10"
@@ -403,7 +414,7 @@ const Navbar = () => {
           <div className="block px-4 py-2 text-sm">
             <div
               onClick={() => setCategoryMenu((prev) => !prev)}
-              className={`cursor-pointer text-sm font-semibold ${categoryMenu ? "text-yellow" : "text-white-70 hover:text-white active:text-white"}`}
+              className={`cursor-pointer text-nowrap text-sm font-semibold ${categoryMenu ? "text-yellow" : "text-white-70 hover:text-white active:text-white"}`}
             >
               All Category
             </div>
@@ -432,7 +443,7 @@ const Navbar = () => {
                 onClick={() => setUserMenu((prev) => !prev)}
                 className={`cursor-pointer text-sm font-semibold ${userMenu ? "text-yellow" : "text-white-70 hover:text-white active:text-white"}`}
               >
-                User
+                {user && user.name}
               </div>
               <ul className={`${userMenu ? "block" : "hidden"} text-white-70`}>
                 <li className="block px-4 py-2 text-sm hover:text-white active:text-white">
@@ -494,7 +505,7 @@ const Navbar = () => {
               <ul className="block w-full">
                 {suggestions.length > 0 && searchInput ? (
                   suggestions.map((movie, index) => (
-                    <li>
+                    <li key={movie.id}>
                       <Link
                         onClick={() => {
                           setSearchInput("");

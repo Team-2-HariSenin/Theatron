@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import useAuthStore from "../../stores/useAuthStore";
 
 const AddDirector = () => {
   const { token } = useAuthStore((state) => state);
@@ -24,6 +25,7 @@ const AddDirector = () => {
         },
       );
       console.log(response.data.message);
+      setName("");
     } catch (error) {
       console.error("Error adding director:", error);
       setLoading(false); // Set loading to false if there's an error

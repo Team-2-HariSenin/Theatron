@@ -26,6 +26,7 @@ const AddWriter = () => {
         },
       );
       console.log(response.data.message);
+      setName("");
     } catch (error) {
       console.error("Error adding writer:", error);
       setLoading(false); // Set loading to false if there's an error

@@ -81,7 +81,7 @@ const MovieDetail = () => {
 
   useEffect(() => {
     getMovieDetail();
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -144,7 +144,7 @@ const MovieDetail = () => {
         {/* Section Trailers */}
         <section
           id="up-next"
-          className="relative ml-1 mr-2 hidden h-[331px] flex-shrink flex-grow-[328] basis-[0%] flex-col lg:flex xl:h-[474px] xl:flex-grow-[402]"
+          className="relative ml-1 mr-2 hidden h-[369px] flex-shrink flex-grow-[328] basis-[0%] flex-col lg:flex xl:h-[474px] xl:flex-grow-[402]"
         >
           <div className="h-[52px]">
             <span className="block overflow-hidden text-ellipsis whitespace-nowrap py-1 text-left text-lg font-semibold text-yellow">
@@ -152,13 +152,13 @@ const MovieDetail = () => {
             </span>
           </div>
 
-          <div className="relative flex h-full flex-col overflow-scroll">
+          <div className="relative flex h-full flex-col overflow-scroll bg-black-10">
             {movie &&
               movie.trailers.length > 0 &&
               movie.trailers.map((trailer) => (
                 <div
                   key={trailer.key}
-                  className="relative flex h-fit w-full flex-shrink-0 overflow-hidden bg-black-20 p-2"
+                  className={`relative flex h-fit w-full flex-shrink-0 overflow-hidden ${currentTrailer === trailer.key && "bg-black-30"} p-2`}
                 >
                   <div className="relative inline-flex aspect-video w-32 flex-shrink-0 overflow-hidden">
                     <img
