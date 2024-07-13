@@ -21,7 +21,9 @@ const Main = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [reorderedMovies, setReorderedMovies] = useState([]);
   const [loading, setLoading] = useState(false);
-  const { user, token, isAuthenticated } = useAuthStore((state) => state);
+  const { token, isAuthenticated, logout, isAdmin } = useAuthStore(
+    (state) => state,
+  );
   const [isWatchList, setIsWatchList] = useState([]);
 
   const navigate = useNavigate();
@@ -53,7 +55,7 @@ const Main = () => {
       setMovies(response.data.data);
       const movieIds = response.data.data.map((movie) => movie.id);
 
-      if (isAuthenticated) {
+      if (isAuthenticated && !isAdmin) {
         const watchListStatus = await getWatchListStatus(movieIds);
         setIsWatchList(watchListStatus);
 
@@ -107,6 +109,9 @@ const Main = () => {
 
   const handleAddToWatchList = (id_movie, index) => {
     if (!isAuthenticated) {
+      return navigate("/signin");
+    } else if (isAdmin) {
+      logout();
       return navigate("/signin");
     }
     watchlistToggle(id_movie, index);

@@ -7,7 +7,9 @@ import useRatingStore from "../stores/useRatingStore";
 
 const CardMovie = ({ type, id_movie, src, title, rateAverage }) => {
   const [loading, setLoading] = useState(false);
-  const { token, isAuthenticated } = useAuthStore((state) => state);
+  const { token, isAuthenticated, isAdmin, logout } = useAuthStore(
+    (state) => state,
+  );
   const [isWatchList, setIsWatchList] = useState(false);
   const [rating, setRating] = useState(null);
 
@@ -56,7 +58,7 @@ const CardMovie = ({ type, id_movie, src, title, rateAverage }) => {
         );
         setIsWatchList(response.data.data.watchlist);
       };
-      if (isAuthenticated) {
+      if (isAuthenticated && !isAdmin) {
         getWatchListStatus();
       }
     } catch (error) {
@@ -87,6 +89,9 @@ const CardMovie = ({ type, id_movie, src, title, rateAverage }) => {
 
   const handleAddToWatchList = () => {
     if (!isAuthenticated) {
+      return navigate("/signin");
+    } else if (isAdmin) {
+      logout();
       return navigate("/signin");
     }
     watchlistToggle();
