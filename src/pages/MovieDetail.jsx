@@ -260,7 +260,9 @@ const MovieDetail = () => {
                 <path d="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z"></path>
               </svg>
 
-              <span className="mr-[2px] text-base font-semibold">10</span>
+              <span className="mr-[2px] text-base font-semibold">
+                {movie && movie.rate_average ? Number(movie.rate_average) : 0}
+              </span>
               <span>/10 </span>
             </div>
             <button
@@ -395,7 +397,7 @@ const MovieDetail = () => {
                 <span className="mr-[2px] text-2xl font-semibold">
                   {movie && movie.rate_average ? Number(movie.rate_average) : 0}
                 </span>
-                <span>/10 </span>
+                <span className="text-white-70">/10 </span>
               </div>
             </div>
             <div className="flex flex-col items-center justify-center px-[.125rem] py-1">
@@ -433,9 +435,12 @@ const MovieDetail = () => {
                   </svg>
                 )}
 
-                <div className="mr-1 text-base font-semibold text-light-blue">
+                <span
+                  className={`${rating ? "mr-[2px] text-2xl" : "text-base text-light-blue"} font-semibold`}
+                >
                   {rating ? rating : "Rate"}
-                </div>
+                </span>
+                {rating && <span className="text-white-70">/10 </span>}
               </button>
             </div>
           </div>
