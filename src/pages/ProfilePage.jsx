@@ -7,6 +7,7 @@ const Profile = () => {
   const [profileData, setProfileData] = useState({
     name: "",
     email: "",
+    oldPassword: "",
     newPassword: "",
     confirmPassword: "",
   });
@@ -14,9 +15,11 @@ const Profile = () => {
   const [editable, setEditable] = useState({
     name: false,
     email: false,
+    password: false,
   });
 
   const [showPasswords, setShowPasswords] = useState({
+    oldPassword: false,
     newPassword: false,
     confirmPassword: false,
   });
@@ -25,7 +28,7 @@ const Profile = () => {
 
   const getProfile = async () => {
     try {
-      const response = await axios.get(`http://127.0.0.1:3000/api/user`, {
+      const response = await axios.get("http://127.0.0.1:3000/api/user", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -41,43 +44,77 @@ const Profile = () => {
   };
 
   const updateProfile = async (field) => {
-    if (
-      field === "password" &&
-      profileData.newPassword !== profileData.confirmPassword
-    ) {
-      setNotification("Passwords do not match!");
-      return;
+    if (field === "password") {
+      if (
+        !profileData.oldPassword ||
+        !profileData.newPassword ||
+        !profileData.confirmPassword
+      ) {
+        setNotification(
+          "Old password, new password, and confirmation are required!",
+        );
+        return;
+      }
+      if (profileData.newPassword !== profileData.confirmPassword) {
+        setNotification("Passwords do not match!");
+        return;
+      }
     }
 
     try {
-      const { newPassword, confirmPassword, ...updateData } = profileData;
-      if (field === "password" && newPassword) {
-        updateData.password = newPassword;
+      const { oldPassword, newPassword, confirmPassword, ...updateData } =
+        profileData;
+
+      if (field === "password") {
+        updateData.oldPassword = oldPassword;
+        updateData.newPassword = newPassword;
+      } else {
+        delete updateData.oldPassword;
+        delete updateData.newPassword;
+        delete updateData.confirmPassword;
       }
 
-      await axios.put(`http://127.0.0.1:3000/api/user`, updateData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const response = await axios.put(
+        "http://127.0.0.1:3000/api/user",
+        updateData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      });
+      );
 
-      if (field === "name" || field === "email") {
-        setNotification(
-          `${field.charAt(0).toUpperCase() + field.slice(1)} updated successfully`,
-        );
-      } else if (field === "password") {
-        setNotification("Password updated successfully");
-        setProfileData({
-          ...profileData,
-          newPassword: "",
-          confirmPassword: "",
-        });
+      // Check if response indicates success
+      if (response.status === 200) {
+        if (field === "name" || field === "email") {
+          setNotification(
+            `${field.charAt(0).toUpperCase() + field.slice(1)} updated successfully`,
+          );
+        } else if (field === "password") {
+          setNotification("Password updated successfully");
+          setProfileData({
+            ...profileData,
+            oldPassword: "",
+            newPassword: "",
+            confirmPassword: "",
+          });
+        }
+
+        setEditable({ ...editable, [field]: false });
+      } else {
+        setNotification("Failed to update profile");
       }
-
-      setEditable({ ...editable, [field]: false });
     } catch (error) {
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        setNotification(error.response.data.message);
+      } else {
+        setNotification("Failed to update profile");
+      }
       console.error(`Error updating ${field}:`, error);
-      setNotification(`Failed to update ${field}`);
     }
   };
 
@@ -140,7 +177,9 @@ const Profile = () => {
               value={profileData.name}
               onChange={handleChange}
               readOnly={!editable.name}
-              className={`rounded bg-black-20 px-4 py-2 text-white ${!editable.name ? "cursor-not-allowed" : ""}`}
+              className={`rounded bg-black-20 px-4 py-2 text-white ${
+                !editable.name ? "cursor-not-allowed" : ""
+              }`}
             />
             <button
               type="button"
@@ -164,7 +203,9 @@ const Profile = () => {
               value={profileData.email}
               onChange={handleChange}
               readOnly={!editable.email}
-              className={`rounded bg-black-20 px-4 py-2 text-white ${!editable.email ? "cursor-not-allowed" : ""}`}
+              className={`rounded bg-black-20 px-4 py-2 text-white ${
+                !editable.email ? "cursor-not-allowed" : ""
+              }`}
             />
             <button
               type="button"
@@ -176,74 +217,118 @@ const Profile = () => {
           </div>
         </div>
 
-        <div className="flex flex-col gap-2">
-          <label className="text-white" htmlFor="newPassword">
-            New Password
-          </label>
-          <div className="relative flex items-center">
-            <input
-              type={showPasswords.newPassword ? "text" : "password"}
-              id="newPassword"
-              name="newPassword"
-              value={profileData.newPassword}
-              onChange={handleChange}
-              className="w-full rounded bg-black-20 px-4 py-2 text-white"
-              placeholder="Enter new password"
-            />
+        {editable.password && (
+          <>
+            <div className="flex flex-col gap-2">
+              <label className="text-white" htmlFor="oldPassword">
+                Old Password
+              </label>
+              <div className="relative flex items-center">
+                <input
+                  type={showPasswords.oldPassword ? "text" : "password"}
+                  id="oldPassword"
+                  name="oldPassword"
+                  value={profileData.oldPassword}
+                  onChange={handleChange}
+                  className="w-full rounded bg-black-20 px-4 py-2 text-white"
+                  placeholder="Enter old password"
+                />
+                <button
+                  type="button"
+                  onClick={() => toggleShowPassword("oldPassword")}
+                  className="absolute right-2 rounded bg-yellow px-2 py-1 text-black"
+                >
+                  {showPasswords.oldPassword ? "Hide" : "Show"}
+                </button>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label className="text-white" htmlFor="newPassword">
+                New Password
+              </label>
+              <div className="relative flex items-center">
+                <input
+                  type={showPasswords.newPassword ? "text" : "password"}
+                  id="newPassword"
+                  name="newPassword"
+                  value={profileData.newPassword}
+                  onChange={handleChange}
+                  className="w-full rounded bg-black-20 px-4 py-2 text-white"
+                  placeholder="Enter new password"
+                />
+                <button
+                  type="button"
+                  onClick={() => toggleShowPassword("newPassword")}
+                  className="absolute right-2 rounded bg-yellow px-2 py-1 text-black"
+                >
+                  {showPasswords.newPassword ? "Hide" : "Show"}
+                </button>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <label className="text-white" htmlFor="confirmPassword">
+                Confirm Password
+              </label>
+              <div className="relative flex items-center">
+                <input
+                  type={showPasswords.confirmPassword ? "text" : "password"}
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  value={profileData.confirmPassword}
+                  onChange={handleChange}
+                  className="w-full rounded bg-black-20 px-4 py-2 text-white"
+                  placeholder="Confirm new password"
+                />
+                <button
+                  type="button"
+                  onClick={() => toggleShowPassword("confirmPassword")}
+                  className="absolute right-2 rounded bg-yellow px-2 py-1 text-black"
+                >
+                  {showPasswords.confirmPassword ? "Hide" : "Show"}
+                </button>
+              </div>
+              {profileData.newPassword && profileData.confirmPassword && (
+                <p
+                  className={`text-sm ${
+                    profileData.newPassword === profileData.confirmPassword
+                      ? "text-green"
+                      : "text-red"
+                  }`}
+                >
+                  {profileData.newPassword === profileData.confirmPassword
+                    ? "Passwords match"
+                    : "Passwords do not match"}
+                </p>
+              )}
+            </div>
+
             <button
               type="button"
-              onClick={() => toggleShowPassword("newPassword")}
-              className="absolute right-2 rounded bg-yellow px-2 py-1 text-black"
+              onClick={handlePasswordUpdate}
+              className="rounded bg-yellow px-4 py-2 font-semibold text-black"
             >
-              {showPasswords.newPassword ? "Hide" : "Show"}
+              Update Password
             </button>
-          </div>
-        </div>
+          </>
+        )}
 
-        <div className="flex flex-col gap-2">
-          <label className="text-white" htmlFor="confirmPassword">
-            Confirm Password
-          </label>
-          <div className="relative flex items-center">
-            <input
-              type={showPasswords.confirmPassword ? "text" : "password"}
-              id="confirmPassword"
-              name="confirmPassword"
-              value={profileData.confirmPassword}
-              onChange={handleChange}
-              className="w-full rounded bg-black-20 px-4 py-2 text-white"
-              placeholder="Confirm new password"
-            />
-            <button
-              type="button"
-              onClick={() => toggleShowPassword("confirmPassword")}
-              className="absolute right-2 rounded bg-yellow px-2 py-1 text-black"
-            >
-              {showPasswords.confirmPassword ? "Hide" : "Show"}
-            </button>
-          </div>
-          {profileData.newPassword && profileData.confirmPassword && (
-            <p
-              className={`text-sm ${profileData.newPassword === profileData.confirmPassword ? "text-green" : "text-red"}`}
-            >
-              {profileData.newPassword === profileData.confirmPassword
-                ? "Passwords match"
-                : "Passwords do not match"}
-            </p>
-          )}
-        </div>
-
-        <button
-          type="button"
-          onClick={handlePasswordUpdate}
-          className="rounded bg-yellow px-4 py-2 font-semibold text-black"
-        >
-          Update Password
-        </button>
+        {!editable.password && (
+          <button
+            type="button"
+            onClick={() => setEditable({ ...editable, password: true })}
+            className="rounded bg-yellow px-4 py-2 font-semibold text-black"
+          >
+            Change Password
+          </button>
+        )}
 
         {notification && (
           <p
-            className={`mt-4 text-center text-sm ${notification.includes("successfully") ? "text-green" : "text-red"}`}
+            className={`mt-4 text-center text-sm ${
+              notification.includes("successfully") ? "text-green" : "text-red"
+            }`}
           >
             {notification}
           </p>
