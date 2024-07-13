@@ -10,7 +10,9 @@ const StarRating = () => {
   const [hover, setHover] = useState(null);
   const [removeButton, setRemoveButton] = useState(false);
 
-  const { token, isAuthenticated } = useAuthStore((state) => state);
+  const { token, isAuthenticated, logout, isAdmin } = useAuthStore(
+    (state) => state,
+  );
   const { active, setActive, titleMovie, idMovie } = useRatingStore(
     (state) => state,
   );
@@ -42,6 +44,9 @@ const StarRating = () => {
 
   const handleClick = () => {
     if (!isAuthenticated) {
+      return navigate("/signin");
+    } else if (isAdmin) {
+      logout();
       return navigate("/signin");
     }
     sendRating();

@@ -14,7 +14,7 @@ const AdminNavbar = () => {
   const [adminOpen, setAdminOpen] = useState(false);
   const [activeNav, setActiveNav] = useState("movies/overviews");
 
-  const logout = useAuthStore((state) => state.logout);
+  const { logout, user } = useAuthStore((state) => state);
 
   return (
     <>
@@ -295,7 +295,7 @@ const AdminNavbar = () => {
                 />
               </svg>
             </div>
-            <h2>Admin 1</h2>
+            <h2>{user && user.name}</h2>
           </div>
         </div>
       </div>

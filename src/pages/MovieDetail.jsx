@@ -81,7 +81,7 @@ const MovieDetail = () => {
 
   useEffect(() => {
     getMovieDetail();
-  }, []);
+  }, [id]);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -144,7 +144,7 @@ const MovieDetail = () => {
         {/* Section Trailers */}
         <section
           id="up-next"
-          className="relative ml-1 mr-2 hidden h-[331px] flex-shrink flex-grow-[328] basis-[0%] flex-col lg:flex xl:h-[474px] xl:flex-grow-[402]"
+          className="relative ml-1 mr-2 hidden h-[369px] flex-shrink flex-grow-[328] basis-[0%] flex-col lg:flex xl:h-[474px] xl:flex-grow-[402]"
         >
           <div className="h-[52px]">
             <span className="block overflow-hidden text-ellipsis whitespace-nowrap py-1 text-left text-lg font-semibold text-yellow">
@@ -152,13 +152,13 @@ const MovieDetail = () => {
             </span>
           </div>
 
-          <div className="relative flex h-full flex-col overflow-scroll">
+          <div className="relative flex h-full flex-col overflow-scroll bg-black-10">
             {movie &&
               movie.trailers.length > 0 &&
               movie.trailers.map((trailer) => (
                 <div
                   key={trailer.key}
-                  className="relative flex h-fit w-full flex-shrink-0 overflow-hidden bg-black-20 p-2"
+                  className={`relative flex h-fit w-full flex-shrink-0 overflow-hidden ${currentTrailer === trailer.key && "bg-black-30"} p-2`}
                 >
                   <div className="relative inline-flex aspect-video w-32 flex-shrink-0 overflow-hidden">
                     <img
@@ -259,8 +259,9 @@ const MovieDetail = () => {
               >
                 <path d="M12 17.27l4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.72 3.67-3.18c.67-.58.31-1.68-.57-1.75l-4.83-.41-1.89-4.46c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5z"></path>
               </svg>
-
-              <span className="mr-[2px] text-base font-semibold">10</span>
+              <span className="mr-[2px] text-base font-semibold">
+                {movie && movie.rate_average ? Number(movie.rate_average) : 0}
+              </span>
               <span>/10 </span>
             </div>
             <button
@@ -325,9 +326,12 @@ const MovieDetail = () => {
                       Writers
                     </span>
                     <div className="z-1 relative flex-grow">
-                      <ul className="flex list-inside list-disc flex-wrap gap-3 text-base font-light text-[#5799EF]">
+                      <ul className="inline-flex flex-wrap font-normal">
                         {movie.writers.map((writer, index) => (
-                          <li key={writer.id}>
+                          <li
+                            key={writer.id}
+                            className="inline align-middle text-light-blue"
+                          >
                             {index > 0 && <span className="bullet"></span>}
                             <Link to={`/writer/${writer.id}`}>
                               {writer.name}
@@ -344,9 +348,12 @@ const MovieDetail = () => {
                       Stars
                     </span>
                     <div className="z-1 relative flex-grow">
-                      <ul className="flex list-inside list-disc flex-wrap gap-3 text-base font-light text-[#5799EF]">
+                      <ul className="inline-flex flex-wrap font-normal">
                         {movie.stars.map((star, index) => (
-                          <li key={star.id}>
+                          <li
+                            key={star.id}
+                            className="inline align-middle text-light-blue"
+                          >
                             {index > 0 && <span className="bullet"></span>}
                             <Link to={`/star/${star.id}`}>{star.name}</Link>
                           </li>
@@ -389,7 +396,7 @@ const MovieDetail = () => {
                 <span className="mr-[2px] text-2xl font-semibold">
                   {movie && movie.rate_average ? Number(movie.rate_average) : 0}
                 </span>
-                <span>/10 </span>
+                <span className="text-white-70">/10 </span>
               </div>
             </div>
             <div className="flex flex-col items-center justify-center px-[.125rem] py-1">
@@ -426,10 +433,12 @@ const MovieDetail = () => {
                     <path d="M19.65 9.04l-4.84-.42-1.89-4.45c-.34-.81-1.5-.81-1.84 0L9.19 8.63l-4.83.41c-.88.07-1.24 1.17-.57 1.75l3.67 3.18-1.1 4.72c-.2.86.73 1.54 1.49 1.08l4.15-2.5 4.15 2.51c.76.46 1.69-.22 1.49-1.08l-1.1-4.73 3.67-3.18c.67-.58.32-1.68-.56-1.75zM12 15.4l-3.76 2.27 1-4.28-3.32-2.88 4.38-.38L12 6.1l1.71 4.04 4.38.38-3.32 2.88 1 4.28L12 15.4z"></path>
                   </svg>
                 )}
-
-                <div className="mr-1 text-base font-semibold text-light-blue">
+                <span
+                  className={`${rating ? "mr-[2px] text-2xl" : "text-base text-light-blue"} font-semibold`}
+                >
                   {rating ? rating : "Rate"}
-                </div>
+                </span>
+                {rating && <span className="text-white-70">/10 </span>}
               </button>
             </div>
           </div>
