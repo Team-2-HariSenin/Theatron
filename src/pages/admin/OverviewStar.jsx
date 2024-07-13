@@ -41,6 +41,26 @@ const OverviewStar = () => {
     getStars(searchInput, 1);
   };
 
+  const deleteStar = async (id) => {
+    try {
+      const response = await axios.delete(
+        `http://127.0.0.1:3000/api/admin/delete-star/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      window.location.reload();
+    } catch (error) {
+      console.error("Error deleting data:", error);
+    }
+  };
+
+  const handleDelete = (id) => {
+    confirm("Do you really want to delete this star?") && deleteStar(id);
+  };
+
   return (
     <div className="flex h-screen w-full flex-col gap-4 px-6 pb-10 pt-2">
       <nav className="relative ml-5 flex h-fit items-center justify-start gap-3 text-4xl font-bold">
@@ -120,7 +140,10 @@ const OverviewStar = () => {
                       >
                         <FaEdit size={26} />
                       </Link>
-                      <button className="text-blue-600 font-medium hover:underline">
+                      <button
+                        onClick={() => handleDelete(star.id)}
+                        className="text-blue-600 font-medium hover:underline"
+                      >
                         <FaTrashCan size={21} />
                       </button>
                     </td>

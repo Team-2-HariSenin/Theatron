@@ -3,12 +3,15 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FaTrashCan } from "react-icons/fa6";
 import { FaEdit, FaInfoCircle } from "react-icons/fa";
+import useAuthStore from "../../stores/useAuthStore";
 
 const OverviewMovie = () => {
   const [searchInput, setSearchInput] = useState("");
   const [movieData, setMovieData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+
+  const { token } = useAuthStore((state) => state);
 
   const getMovies = async (keyword = "", page = 1) => {
     try {
@@ -31,6 +34,26 @@ const OverviewMovie = () => {
   const handleSearch = () => {
     setCurrentPage(1);
     getMovies(searchInput, 1);
+  };
+
+  const deleteMovie = async (id) => {
+    try {
+      const response = await axios.delete(
+        `http://127.0.0.1:3000/api/admin/delete-movie/${id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        },
+      );
+      window.location.reload();
+    } catch (error) {
+      console.error("Error deleting data:", error);
+    }
+  };
+
+  const handleDelete = (id) => {
+    confirm("Do you really want to delete this movie?") && deleteMovie(id);
   };
 
   return (
@@ -125,7 +148,10 @@ const OverviewMovie = () => {
                       >
                         <FaEdit size={26} />
                       </Link>
-                      <button className="text-blue-600 font-medium hover:underline">
+                      <button
+                        onClick={() => handleDelete(movie.id)}
+                        className="text-blue-600 font-medium hover:underline"
+                      >
                         <FaTrashCan size={21} />
                       </button>
                     </td>
