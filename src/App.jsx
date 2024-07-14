@@ -10,9 +10,9 @@ import useAuthStore from "./stores/useAuthStore";
 import MainLayout from "./layouts/MainLayout";
 import NavFootLayout from "./layouts/NavFootLayout";
 import HomePage from "./pages/HomePage";
-import WatchList from "./pages/WatchList";
-import MovieDetail from "./pages/MovieDetail";
-import Category from "./pages/Category";
+import WatchList from "./pages/WatchListPage";
+import MovieDetail from "./pages/MovieDetailPage";
+import Category from "./pages/CategoryPage";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import AdminLayout from "./layouts/AdminLayout";
@@ -37,10 +37,11 @@ import AddAdmin from "./pages/admin/AddAdmin";
 import EditAdmin from "./pages/admin/EditAdmin";
 import AdminProfile from "./pages/admin/AdminProfile";
 import ProtectedRoute from "./components/ProtectedRoute";
-import Writer from "./pages/Writer";
-import Star from "./pages/Star";
-import Director from "./pages/Director";
-import Profile from "./pages/Profile";
+import Writer from "./pages/WriterPage";
+import Star from "./pages/StarPage";
+import Director from "./pages/DirectorPage";
+import Profile from "./pages/ProfilePage";
+import Search from "./pages/SearchPage";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -55,6 +56,7 @@ const router = createBrowserRouter(
           <Route index element={<Profile />} />
         </Route>
         <Route path="detail/:id" element={<MovieDetail />} />
+        <Route path="/search" element={<Search />} />
         <Route path="/category/:id" element={<Category />} />
         <Route path="/writer/:id" element={<Writer />} />
         <Route path="/star/:id" element={<Star />} />

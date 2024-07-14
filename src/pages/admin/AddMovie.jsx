@@ -194,7 +194,6 @@ const AddMovie = () => {
       if (banner && poster && inputImageBy === "file") {
         await addImage(idMovie);
       }
-      await addImage(idMovie);
     } catch (error) {
       console.error("Error adding movie:", error);
       setLoading(false); // Set loading to false if there's an error
@@ -245,7 +244,7 @@ const AddMovie = () => {
             value={overview}
             onChange={onChangeHandler(setOverview)}
             required
-            className="w-full rounded border border-black-30 p-2 text-black-30"
+            className="min-h-28 w-full rounded border border-black-30 p-2 text-black-30"
           />
           <label
             className="font-semibold text-black-30"
@@ -487,7 +486,7 @@ const AddMovie = () => {
               id="movieWriter"
               value={urlBannerInput}
               onChange={(e) => setUrlBannerInput(e.target.value)}
-              placeholder="Search Star..."
+              placeholder="Add Image Path from TMDB API"
               className="w-full cursor-pointer rounded border border-black-30 p-2 text-black-30 placeholder:italic placeholder:text-black-30"
             />
           ) : (
@@ -495,7 +494,7 @@ const AddMovie = () => {
               <input
                 type="file"
                 onChange={onChangeHandlerFile(setBanner)}
-                className="w-full cursor-pointer rounded border border-black-30 p-2 text-black-30 placeholder:italic placeholder:text-black-30"
+                className="min-h-11 w-full cursor-pointer rounded border border-black-30 p-2 text-black-30 placeholder:italic placeholder:text-black-30"
               />
             )
           )}
@@ -507,7 +506,7 @@ const AddMovie = () => {
               id="movieWriter"
               value={urlPosterInput}
               onChange={(e) => setUrlPosterInput(e.target.value)}
-              placeholder="Search Star..."
+              placeholder="Add Image Path from TMDB API"
               className="w-full cursor-pointer rounded border border-black-30 p-2 text-black-30 placeholder:italic placeholder:text-black-30"
             />
           ) : (
@@ -515,7 +514,7 @@ const AddMovie = () => {
               <input
                 type="file"
                 onChange={onChangeHandlerFile(setPoster)}
-                className="w-full cursor-pointer rounded border border-black-30 p-2 text-black-30 placeholder:italic placeholder:text-black-30"
+                className="min-h-11 w-full cursor-pointer rounded border border-black-30 p-2 text-black-30 placeholder:italic placeholder:text-black-30"
               />
             )
           )}

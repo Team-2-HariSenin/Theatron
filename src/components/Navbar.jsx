@@ -1,11 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Menu, MenuButton, MenuItems, Transition } from "@headlessui/react";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuthStore from "../stores/useAuthStore";
 import axios from "axios";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [searchMobile, setSearchMobile] = useState(false);
   const [categoryData, setCategoryData] = useState([]);
@@ -201,7 +203,13 @@ const Navbar = () => {
                     placeholder="search..."
                   />
 
-                  <button className="h-full rounded-r border-l-[1px] border-l-black-90 bg-white px-4 py-1 text-sm font-semibold text-black sm:block">
+                  <button
+                    onClick={() => {
+                      navigate(`/search?keyword=${searchInput}`);
+                      setSearchInput("");
+                    }}
+                    className="h-full rounded-r border-l-[1px] border-l-black-90 bg-white px-4 py-1 text-sm font-semibold text-black sm:block"
+                  >
                     Search
                   </button>
                   <div className="absolute bottom-0 w-full">
@@ -423,6 +431,7 @@ const Navbar = () => {
             >
               {categoryData.map((category) => (
                 <li
+                  onClick={() => setIsMobileMenuOpen(false)}
                   className="block px-4 py-2 text-sm hover:text-white active:text-white"
                   key={category.id}
                 >
@@ -488,7 +497,6 @@ const Navbar = () => {
             xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
-            class="ipc-icon ipc-icon--clear"
             viewBox="0 0 24 24"
             fill="currentColor"
             role="presentation"
