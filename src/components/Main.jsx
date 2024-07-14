@@ -212,7 +212,9 @@ const Main = () => {
                                 <path d="M12 24C5.373 24 0 18.627 0 12S5.373 0 12 0s12 5.373 12 12-5.373 12-12 12zm0-1c6.075 0 11-4.925 11-11S18.075 1 12 1 1 5.925 1 12s4.925 11 11 11z"></path>
                               </svg>
                               <span className="ml-4 block sm:hidden">
-                                {movie.trailers[0].duration}
+                                {movie.trailers.length > 0
+                                  ? movie.trailers[0].duration
+                                  : "0"}
                               </span>
                             </div>
                             <div className="flex w-full flex-col pb-7">
@@ -221,7 +223,9 @@ const Main = () => {
                                   {movie.name}
                                 </span>
                                 <span className="ml-8 hidden self-end text-white-70 sm:inline sm:text-lg xl:text-xl">
-                                  {movie.trailers[0].duration}
+                                  {movie.trailers.length > 0
+                                    ? movie.trailers[0].duration
+                                    : "0"}
                                 </span>
                               </div>
                               <div className="text-sm text-white-70 xl:text-xl">
@@ -314,7 +318,9 @@ const Main = () => {
                               <path d="M12 24C5.373 24 0 18.627 0 12S5.373 0 12 0s12 5.373 12 12-5.373 12-12 12zm0-1c6.075 0 11-4.925 11-11S18.075 1 12 1 1 5.925 1 12s4.925 11 11 11z"></path>
                             </svg>
                             <span className="text-[.875rem] leading-5 text-white-70">
-                              {movie.trailers[0].duration}
+                              {movie.trailers.length > 0
+                                ? movie.trailers[0].duration
+                                : "0"}
                             </span>
                           </div>
                           <div className="relative max-h-10 w-full text-left">

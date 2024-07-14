@@ -488,7 +488,7 @@ const MovieDetail = () => {
 
       {movie &&
         movie.categories.map((category) => (
-          <MovieList categoryId={category.id} />
+          <MovieList key={category.id} categoryId={category.id} />
         ))}
     </main>
   );
