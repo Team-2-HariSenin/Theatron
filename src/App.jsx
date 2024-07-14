@@ -50,6 +50,7 @@ const router = createBrowserRouter(
         <Route path="watchlist" element={<ProtectedRoute />}>
           <Route index element={<WatchList />} />
         </Route>
+        <Route path="detail" element={<MovieDetail />} />
         <Route path="profile" element={<ProtectedRoute />}>
           <Route index element={<Profile />} />
         </Route>
