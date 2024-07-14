@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import useAuthStore from "../../stores/useAuthStore";
 
@@ -9,6 +9,8 @@ function useQuery() {
 
 const EditDirector = () => {
   const { token } = useAuthStore((state) => state);
+
+  const navigate = useNavigate()
 
   const query = useQuery();
   const idDirector = query.get("id_director");
@@ -61,6 +63,7 @@ const EditDirector = () => {
         },
       );
       console.log(response.data.message);
+      navigate("/admin/directors/overviews");
     } catch (error) {
       console.error("Error adding director:", error);
       setLoading(false); // Set loading to false if there's an error
@@ -84,7 +87,7 @@ const EditDirector = () => {
               <path d="M5.622.631A2.153 2.153 0 0 0 5 2.147c0 .568.224 1.113.622 1.515l8.249 8.34-8.25 8.34a2.16 2.16 0 0 0-.548 2.07c.196.74.768 1.317 1.499 1.515a2.104 2.104 0 0 0 2.048-.555l9.758-9.866a2.153 2.153 0 0 0 0-3.03L8.62.61C7.812-.207 6.45-.207 5.622.63z"></path>
             </svg>
           </span>
-          <h1>Add</h1>
+          <h1>Edit</h1>
         </nav>
         {idDirector ? (
           loading ? (
@@ -117,7 +120,7 @@ const EditDirector = () => {
                   disabled={loading}
                   className="mb-12 mt-5 w-full cursor-pointer rounded border border-black-30 bg-yellow p-2 text-black-30"
                 >
-                  {loading ? "Upload Director..." : "Update Director"}
+                  {loading ? "Updating Director..." : "Update Director"}
                 </button>
               </form>
             </div>
