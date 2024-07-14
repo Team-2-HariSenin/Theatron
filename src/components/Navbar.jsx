@@ -363,7 +363,6 @@ const Navbar = () => {
                     <Menu.Items className="absolute right-0 z-50 mt-2 w-56 origin-top-right rounded-md bg-black-20 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <div className="py-1">
                         {[
-                          { name: "Your Activity", path: "/activity" },
                           { name: "Your Watchlist", path: "/watchlist" },
                           { name: "Account Setting", path: "/profile" },
                         ].map((item) => (

@@ -377,7 +377,7 @@ function EditMovie() {
                   value={overview}
                   onChange={onChangeHandler(setOverview)}
                   required
-                  className="w-full rounded border border-black-30 p-2 text-black-30"
+                  className="min-h-28 w-full rounded border border-black-30 p-2 text-black-30"
                 />
                 <label
                   className="font-semibold text-black-30"
@@ -626,7 +626,7 @@ function EditMovie() {
                     <input
                       type="file"
                       onChange={onChangeHandlerFile(setBanner)}
-                      className="w-full cursor-pointer rounded border border-black-30 p-2 text-black-30 placeholder:italic placeholder:text-black-30"
+                      className="min-h-11 w-full cursor-pointer rounded border border-black-30 p-2 text-black-30 placeholder:italic placeholder:text-black-30"
                     />
                   )}
 
@@ -649,7 +649,7 @@ function EditMovie() {
                     <input
                       type="file"
                       onChange={onChangeHandlerFile(setPoster)}
-                      className="w-full cursor-pointer rounded border border-black-30 p-2 text-black-30 placeholder:italic placeholder:text-black-30"
+                      className="min-h-11 w-full cursor-pointer rounded border border-black-30 p-2 text-black-30 placeholder:italic placeholder:text-black-30"
                     />
                   )}
                 </div>
