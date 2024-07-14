@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import useAuthStore from "../../stores/useAuthStore";
 
 function useQuery() {
   return new URLSearchParams(useLocation().search);
 }
 
 const EditCategory = () => {
-  const token = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkFkbWluMSIsImVtYWlsIjoiYWRtaW4xQGV4YW1wbGUuY29tIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNzIwMDY3MDA5fQ.ImYnpJcCPh5CbXpe-c6vSrvcFudTVt7vWkBaINDgMY0`;
+  const { token } = useAuthStore((state) => state);
+  const navigate = useNavigate();
 
   const query = useQuery();
   const idCategory = query.get("id_category");
@@ -60,6 +62,7 @@ const EditCategory = () => {
         },
       );
       console.log(response.data.message);
+      navigate("/admin/categories/overviews");
     } catch (error) {
       console.error("Error adding category:", error);
       setLoading(false); // Set loading to false if there's an error
@@ -83,7 +86,7 @@ const EditCategory = () => {
               <path d="M5.622.631A2.153 2.153 0 0 0 5 2.147c0 .568.224 1.113.622 1.515l8.249 8.34-8.25 8.34a2.16 2.16 0 0 0-.548 2.07c.196.74.768 1.317 1.499 1.515a2.104 2.104 0 0 0 2.048-.555l9.758-9.866a2.153 2.153 0 0 0 0-3.03L8.62.61C7.812-.207 6.45-.207 5.622.63z"></path>
             </svg>
           </span>
-          <h1>Add</h1>
+          <h1>Edit</h1>
         </nav>
         {idCategory ? (
           loading ? (
@@ -116,7 +119,7 @@ const EditCategory = () => {
                   disabled={loading}
                   className="mb-12 mt-5 w-full cursor-pointer rounded border border-black-30 bg-yellow p-2 text-black-30"
                 >
-                  {loading ? "Upload Category..." : "Update Category"}
+                  {loading ? "Updating Category..." : "Update Category"}
                 </button>
               </form>
             </div>

@@ -16,6 +16,8 @@ function useQuery() {
 function EditMovie() {
   const { token } = useAuthStore((state) => state);
 
+  const navigate = useNavigate();
+
   const query = useQuery();
   const idMovie = query.get("id_movie");
   const [movieId, setMovieId] = useState("");
@@ -234,6 +236,8 @@ function EditMovie() {
       setTrailer(response.data.data.trailers.map((trailer) => trailer.key));
       setUrlBanner(response.data.data.url_image);
       setUrlPoster(response.data.data.url_poster);
+      setLoading(false);
+      navigate("/admin/movies/overviews");
     } catch (error) {
       console.error("Error updating movie:", error);
       setLoading(false); // Set loading to false if there's an error
@@ -257,8 +261,6 @@ function EditMovie() {
         },
       );
       console.log(res.data.message);
-      updateTrailer();
-      updateMovie();
     } catch (err) {
       console.error("Error uploading files:", err);
     } finally {
@@ -267,8 +269,12 @@ function EditMovie() {
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    setLoading(true); // Set loading to true when form is submitted
-    addImage();
+    setLoading(true);
+    if (banner && poster) {
+      addImage();
+    }
+    updateTrailer();
+    updateMovie();
   };
 
   const deleteImage = async (url, type) => {
@@ -317,7 +323,7 @@ function EditMovie() {
               <path d="M5.622.631A2.153 2.153 0 0 0 5 2.147c0 .568.224 1.113.622 1.515l8.249 8.34-8.25 8.34a2.16 2.16 0 0 0-.548 2.07c.196.74.768 1.317 1.499 1.515a2.104 2.104 0 0 0 2.048-.555l9.758-9.866a2.153 2.153 0 0 0 0-3.03L8.62.61C7.812-.207 6.45-.207 5.622.63z"></path>
             </svg>
           </span>
-          <h1>Add</h1>
+          <h1>Edit</h1>
         </nav>
         {idMovie ? (
           loading ? (
@@ -653,7 +659,7 @@ function EditMovie() {
                   disabled={loading}
                   className="mb-12 w-full cursor-pointer rounded border border-black-30 bg-yellow p-2 text-black-30"
                 >
-                  {loading ? "Upload Movie..." : "Add Movie"}
+                  {loading ? "Updating Movie..." : "Update Movie"}
                 </button>
               </form>
             </div>
