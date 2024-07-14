@@ -194,6 +194,9 @@ const AddMovie = () => {
       if (banner && poster && inputImageBy === "file") {
         await addImage(idMovie);
       }
+
+      setLoading(false);
+      window.location.reload();
     } catch (error) {
       console.error("Error adding movie:", error);
       setLoading(false); // Set loading to false if there's an error
