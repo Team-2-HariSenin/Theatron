@@ -39,21 +39,27 @@ const SignUpPage = () => {
     setError("");
     setPasswordError("");
     try {
-      const response = await axios.post("http://localhost:3000/api/auth/register", {
-        name: firstName,
-        email,
-        password,
-      });
+      const response = await axios.post(
+        "https://theatron-backend.vercel.app/api/auth/register",
+        {
+          name: firstName,
+          email,
+          password,
+        },
+      );
       console.log("Registration response:", response.data);
       if (response.data.message === "User successfully registered") {
         navigate("/signin");
       } else {
-        setError(response.data.message || "Registration failed. Please try again.");
+        setError(
+          response.data.message || "Registration failed. Please try again.",
+        );
       }
     } catch (error) {
       console.error("Registration failed", error);
       setError(
-        error.response?.data?.message || "Registration failed. Please try again."
+        error.response?.data?.message ||
+          "Registration failed. Please try again.",
       );
     } finally {
       setLoading(false);
@@ -106,7 +112,9 @@ const SignUpPage = () => {
               className="focus:border-sky-500 focus:ring-sky-500 mt-1 w-full rounded-md border px-3 py-2 focus:outline-none focus:ring"
               required
             />
-            {passwordError && <p className="text-red-500 text-sm">{passwordError}</p>}
+            {passwordError && (
+              <p className="text-red-500 text-sm">{passwordError}</p>
+            )}
           </div>
           <div className="py-2">
             <p className="text-gray-900 font-inter">

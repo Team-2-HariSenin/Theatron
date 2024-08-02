@@ -14,7 +14,7 @@ const SignInPage = () => {
     event.preventDefault();
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/auth/login",
+        "https://theatron-backend.vercel.app/api/auth/login",
         {
           email,
           password,
@@ -108,7 +108,7 @@ const SignInPage = () => {
         <Link to={"/signup"} className="item mt-2 flex w-full justify-center">
           <button
             type="submit"
-            className="bg-gray-100 border-gray-700 w-3/4 rounded-xl border py-2 text-sm text-black  hover:bg-black-40"
+            className="bg-gray-100 border-gray-700 w-3/4 rounded-xl border py-2 text-sm text-black hover:bg-black-40"
           >
             Create your THEATRON account
           </button>
