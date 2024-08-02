@@ -16,7 +16,7 @@ const AddCategory = () => {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:3000/api/admin/add-category",
+        "https://theatron-backend.vercel.app/api/admin/add-category",
         { name },
         {
           headers: {

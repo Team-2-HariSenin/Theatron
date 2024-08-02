@@ -16,7 +16,7 @@ const OverviewCategory = () => {
   const getCategories = async (keyword = "", page = 1) => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:3000/api/movie/all-category?keyword=${keyword}&page=${page}&limit=10`,
+        `https://theatron-backend.vercel.app/api/movie/all-category?keyword=${keyword}&page=${page}&limit=10`,
       );
       setCategoryData(response.data.data.categories);
       setTotalPages(response.data.data.totalPages);
@@ -39,7 +39,7 @@ const OverviewCategory = () => {
   const deleteCategory = async (id) => {
     try {
       const response = await axios.delete(
-        `http://127.0.0.1:3000/api/admin/delete-category/${id}`,
+        `https://theatron-backend.vercel.app/api/admin/delete-category/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

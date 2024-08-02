@@ -24,7 +24,7 @@ const MovieDetail = () => {
   const getWatchListStatus = async () => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:3000/api/watchlist/${id}`,
+        `https://theatron-backend.vercel.app/api/watchlist/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -42,7 +42,9 @@ const MovieDetail = () => {
   const getMovieDetail = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`http://127.0.0.1:3000/api/movie/${id}`);
+      const response = await axios.get(
+        `https://theatron-backend.vercel.app/api/movie/${id}`,
+      );
       setMovie(response.data.data);
       setCurrentTrailer(response.data.data.trailers[0].key);
       // console.log(response.data.data);
@@ -56,7 +58,7 @@ const MovieDetail = () => {
   const getRating = async () => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:3000/api/rate?id_movie=${id}`,
+        `https://theatron-backend.vercel.app/api/rate?id_movie=${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -93,7 +95,7 @@ const MovieDetail = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        `http://127.0.0.1:3000/api/watchlist/toggle`,
+        `https://theatron-backend.vercel.app/api/watchlist/toggle`,
         { id_movie: id },
         {
           headers: {

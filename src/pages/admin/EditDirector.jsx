@@ -10,7 +10,7 @@ function useQuery() {
 const EditDirector = () => {
   const { token } = useAuthStore((state) => state);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const query = useQuery();
   const idDirector = query.get("id_director");
@@ -27,7 +27,9 @@ const EditDirector = () => {
     if (idDirector) {
       // Fetch movie data from API
       axios
-        .get(`http://127.0.0.1:3000/api/movie/director/${idDirector}?limit=0`)
+        .get(
+          `https://theatron-backend.vercel.app/api/movie/director/${idDirector}?limit=0`,
+        )
         .then((response) => {
           setDirectorData(response.data.data);
           setName(response.data.data.name);
@@ -54,7 +56,7 @@ const EditDirector = () => {
 
     try {
       const response = await axios.put(
-        "http://127.0.0.1:3000/api/admin/update-director",
+        "https://theatron-backend.vercel.app/api/admin/update-director",
         updatedDirector,
         {
           headers: {

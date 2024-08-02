@@ -6,11 +6,10 @@ const MovieList = ({ categoryId }) => {
   const [movieData, setMovieData] = useState([]);
   const [title, setTitle] = useState("");
 
-
   const getCategories = async () => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:3000/api/movie/all-category?id_category=${categoryId}`,
+        `https://theatron-backend.vercel.app/api/movie/all-category?id_category=${categoryId}`,
       );
       setTitle(response.data.data.categories[0].name);
     } catch (error) {
@@ -21,7 +20,7 @@ const MovieList = ({ categoryId }) => {
   const getMovies = async () => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:3000/api/movie/category/${categoryId}?limit=10`,
+        `https://theatron-backend.vercel.app/api/movie/category/${categoryId}?limit=10`,
       );
       setMovieData(response.data.data.movies);
     } catch (error) {
@@ -33,8 +32,6 @@ const MovieList = ({ categoryId }) => {
     getCategories();
     getMovies();
   }, []);
-
-
 
   const elementRef = useRef(null);
   const [leftArrowDisable, setLeftArrowDisable] = useState(true);

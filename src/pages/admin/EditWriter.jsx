@@ -27,7 +27,9 @@ const EditWriter = () => {
     if (idWriter) {
       // Fetch movie data from API
       axios
-        .get(`http://127.0.0.1:3000/api/movie/writer/${idWriter}?limit=0`)
+        .get(
+          `https://theatron-backend.vercel.app/api/movie/writer/${idWriter}?limit=0`,
+        )
         .then((response) => {
           setWriterData(response.data.data);
           setName(response.data.data.name);
@@ -54,7 +56,7 @@ const EditWriter = () => {
 
     try {
       const response = await axios.put(
-        "http://127.0.0.1:3000/api/admin/update-writer",
+        "https://theatron-backend.vercel.app/api/admin/update-writer",
         updatedWriter,
         {
           headers: {

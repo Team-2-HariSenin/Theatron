@@ -88,7 +88,7 @@ function EditMovie() {
 
   useEffect(() => {
     getSuggestions(
-      `http://127.0.0.1:3000/api/admin/all-director?keyword=${directorInput}`,
+      `https://theatron-backend.vercel.app/api/admin/all-director?keyword=${directorInput}`,
       setDataDirector,
       directorInput,
     );
@@ -97,7 +97,7 @@ function EditMovie() {
 
   useEffect(() => {
     getSuggestions(
-      `http://127.0.0.1:3000/api/admin/all-writer?keyword=${writerInput}`,
+      `https://theatron-backend.vercel.app/api/admin/all-writer?keyword=${writerInput}`,
       setDataWriter,
       writerInput,
     );
@@ -105,7 +105,7 @@ function EditMovie() {
 
   useEffect(() => {
     getSuggestions(
-      `http://127.0.0.1:3000/api/admin/all-star?keyword=${starInput}`,
+      `https://theatron-backend.vercel.app/api/admin/all-star?keyword=${starInput}`,
       setDataStar,
       starInput,
     );
@@ -113,7 +113,7 @@ function EditMovie() {
 
   useEffect(() => {
     getSuggestions(
-      `http://127.0.0.1:3000/api/movie/all-category?keyword=${categoryInput}`,
+      `https://theatron-backend.vercel.app/api/movie/all-category?keyword=${categoryInput}`,
       setDataCategory,
       categoryInput,
     );
@@ -130,7 +130,7 @@ function EditMovie() {
     if (idMovie) {
       // Fetch movie data from API
       axios
-        .get(`http://127.0.0.1:3000/api/movie/${idMovie}`)
+        .get(`https://theatron-backend.vercel.app/api/movie/${idMovie}`)
         .then((response) => {
           setMovieData(response.data.data);
           setName(response.data.data.name);
@@ -159,7 +159,7 @@ function EditMovie() {
     };
     try {
       const res = await axios.put(
-        `http://127.0.0.1:3000/api/admin/update-trailer`,
+        `https://theatron-backend.vercel.app/api/admin/update-trailer`,
         newTrailer,
         {
           headers: {
@@ -216,7 +216,7 @@ function EditMovie() {
 
     try {
       const response = await axios.put(
-        "http://127.0.0.1:3000/api/admin/update-movie",
+        "https://theatron-backend.vercel.app/api/admin/update-movie",
         updatedMovie,
 
         {
@@ -251,7 +251,7 @@ function EditMovie() {
     formData.append("poster", poster);
     try {
       const res = await axios.post(
-        `http://127.0.0.1:3000/api/admin/add-image`,
+        `https://theatron-backend.vercel.app/api/admin/add-image`,
         formData,
         {
           headers: {
@@ -281,7 +281,7 @@ function EditMovie() {
     console.log("Delete Image...");
     try {
       const res = await axios.delete(
-        "http://127.0.0.1:3000/api/admin/delete-image",
+        "https://theatron-backend.vercel.app/api/admin/delete-image",
         {
           headers: {
             Authorization: `Bearer ${token}`,

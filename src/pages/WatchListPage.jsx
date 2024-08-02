@@ -9,11 +9,14 @@ const WatchList = () => {
   const [watchlistData, setWatchlistData] = useState([]);
   const getWatchList = async () => {
     try {
-      const response = await axios.get(`http://127.0.0.1:3000/api/watchlist`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const response = await axios.get(
+        `https://theatron-backend.vercel.app/api/watchlist`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      });
+      );
       setWatchlistData(response.data.data.movies);
     } catch (error) {
       console.error("Error fetching data:", error);

@@ -16,7 +16,7 @@ const Search = () => {
   const getMovieBySearch = async (keyword) => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:3000/api/movie?keyword=${keyword}&limit=10`,
+        `https://theatron-backend.vercel.app/api/movie?keyword=${keyword}&limit=10`,
       );
       setMovieData(response.data.data.movies);
       // console.log(response.data.data.movies);

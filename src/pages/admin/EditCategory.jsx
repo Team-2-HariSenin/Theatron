@@ -26,7 +26,9 @@ const EditCategory = () => {
     if (idCategory) {
       // Fetch movie data from API
       axios
-        .get(`http://127.0.0.1:3000/api/movie/category/${idCategory}?limit=0`)
+        .get(
+          `https://theatron-backend.vercel.app/api/movie/category/${idCategory}?limit=0`,
+        )
         .then((response) => {
           setCategoryData(response.data.data);
           setName(response.data.data.name);
@@ -53,7 +55,7 @@ const EditCategory = () => {
 
     try {
       const response = await axios.put(
-        "http://127.0.0.1:3000/api/admin/update-category",
+        "https://theatron-backend.vercel.app/api/admin/update-category",
         updatedCategory,
         {
           headers: {

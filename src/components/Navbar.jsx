@@ -23,7 +23,7 @@ const Navbar = () => {
   const getCategories = async () => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:3000/api/movie/all-category`,
+        `https://theatron-backend.vercel.app/api/movie/all-category`,
       );
       setCategoryData(response.data.data.categories);
     } catch (error) {
@@ -38,7 +38,7 @@ const Navbar = () => {
   const getSuggestions = async (keyword) => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:3000/api/movie?keyword=${keyword}&limit=10`,
+        `https://theatron-backend.vercel.app/api/movie?keyword=${keyword}&limit=10`,
       );
       setSuggestions(response.data.data.movies);
       // console.log(response.data.data.movies);

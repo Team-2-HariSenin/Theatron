@@ -12,7 +12,7 @@ const Director = () => {
   const getMovieByDirector = async () => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:3000/api/movie/director/${id}`,
+        `https://theatron-backend.vercel.app/api/movie/director/${id}`,
       );
       setDirectorData(response.data.data.movies);
       setDirectorName(response.data.data.name);

@@ -27,7 +27,7 @@ const StarRating = () => {
   const sendRating = async () => {
     try {
       const response = await axios.post(
-        "http://127.0.0.1:3000/api/rate",
+        "https://theatron-backend.vercel.app/api/rate",
         { id_movie: idMovie, rate: rating },
         {
           headers: {
@@ -60,14 +60,17 @@ const StarRating = () => {
    */
   const removeRate = async () => {
     try {
-      const response = await axios.delete(`http://127.0.0.1:3000/api/rate`, {
-        data: {
-          id_movie: idMovie,
+      const response = await axios.delete(
+        `https://theatron-backend.vercel.app/api/rate`,
+        {
+          data: {
+            id_movie: idMovie,
+          },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      );
       setRating(null);
       setRemoveButton(false);
       setActive(false);
@@ -86,7 +89,7 @@ const StarRating = () => {
   const getRating = async () => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:3000/api/rate?id_movie=${idMovie}`,
+        `https://theatron-backend.vercel.app/api/rate?id_movie=${idMovie}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

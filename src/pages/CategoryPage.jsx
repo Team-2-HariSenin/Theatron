@@ -12,7 +12,7 @@ const Category = () => {
   const getMovieByCategory = async () => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:3000/api/movie/category/${id}`,
+        `https://theatron-backend.vercel.app/api/movie/category/${id}`,
       );
       setCategoryData(response.data.data.movies);
       setCategoryName(response.data.data.name);

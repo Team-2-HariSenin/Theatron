@@ -16,7 +16,7 @@ const OverviewDirector = () => {
   const getDirectors = async (keyword = "", page = 1) => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:3000/api/admin/all-director?keyword=${keyword}&page=${page}&limit=10`,
+        `https://theatron-backend.vercel.app/api/admin/all-director?keyword=${keyword}&page=${page}&limit=10`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -44,7 +44,7 @@ const OverviewDirector = () => {
   const deleteDirector = async (id) => {
     try {
       const response = await axios.delete(
-        `http://127.0.0.1:3000/api/admin/delete-director/${id}`,
+        `https://theatron-backend.vercel.app/api/admin/delete-director/${id}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

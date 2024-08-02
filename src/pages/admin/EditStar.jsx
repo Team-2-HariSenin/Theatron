@@ -27,7 +27,9 @@ const EditStar = () => {
     if (idStar) {
       // Fetch movie data from API
       axios
-        .get(`http://127.0.0.1:3000/api/movie/star/${idStar}?limit=0`)
+        .get(
+          `https://theatron-backend.vercel.app/api/movie/star/${idStar}?limit=0`,
+        )
         .then((response) => {
           setStarData(response.data.data);
           setName(response.data.data.name);
@@ -54,7 +56,7 @@ const EditStar = () => {
 
     try {
       const response = await axios.put(
-        "http://127.0.0.1:3000/api/admin/update-star",
+        "https://theatron-backend.vercel.app/api/admin/update-star",
         updatedStar,
         {
           headers: {

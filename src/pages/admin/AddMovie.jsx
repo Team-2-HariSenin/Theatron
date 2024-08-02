@@ -73,7 +73,7 @@ const AddMovie = () => {
 
   useEffect(() => {
     getSuggestions(
-      `http://127.0.0.1:3000/api/admin/all-director?keyword=${directorInput}`,
+      `https://theatron-backend.vercel.app/api/admin/all-director?keyword=${directorInput}`,
       setDataDirector,
       directorInput,
     );
@@ -81,7 +81,7 @@ const AddMovie = () => {
 
   useEffect(() => {
     getSuggestions(
-      `http://127.0.0.1:3000/api/admin/all-writer?keyword=${writerInput}`,
+      `https://theatron-backend.vercel.app/api/admin/all-writer?keyword=${writerInput}`,
       setDataWriter,
       writerInput,
     );
@@ -89,7 +89,7 @@ const AddMovie = () => {
 
   useEffect(() => {
     getSuggestions(
-      `http://127.0.0.1:3000/api/admin/all-star?keyword=${starInput}`,
+      `https://theatron-backend.vercel.app/api/admin/all-star?keyword=${starInput}`,
       setDataStar,
       starInput,
     );
@@ -97,7 +97,7 @@ const AddMovie = () => {
 
   useEffect(() => {
     getSuggestions(
-      `http://127.0.0.1:3000/api/movie/all-category?keyword=${categoryInput}`,
+      `https://theatron-backend.vercel.app/api/movie/all-category?keyword=${categoryInput}`,
       setDataCategory,
       categoryInput,
     );
@@ -117,7 +117,7 @@ const AddMovie = () => {
     formData.append("poster", poster);
     try {
       const res = await axios.post(
-        `http://127.0.0.1:3000/api/admin/add-image`,
+        `https://theatron-backend.vercel.app/api/admin/add-image`,
         formData,
         {
           headers: {
@@ -142,7 +142,7 @@ const AddMovie = () => {
     };
     try {
       const res = await axios.post(
-        `http://127.0.0.1:3000/api/admin/add-trailer`,
+        `https://theatron-backend.vercel.app/api/admin/add-trailer`,
         newTrailer,
         {
           headers: {
@@ -179,7 +179,7 @@ const AddMovie = () => {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:3000/api/admin/add-movie",
+        "https://theatron-backend.vercel.app/api/admin/add-movie",
         newMovie,
 
         {

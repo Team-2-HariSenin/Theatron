@@ -32,7 +32,7 @@ const Main = () => {
     try {
       const responses = await Promise.all(
         movieIds.map((id) =>
-          axios.get(`http://127.0.0.1:3000/api/watchlist/${id}`, {
+          axios.get(`https://theatron-backend.vercel.app/api/watchlist/${id}`, {
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -50,7 +50,7 @@ const Main = () => {
     try {
       setLoading(true);
       const response = await axios.get(
-        `http://127.0.0.1:3000/api/movie/playnow?id_user=1`,
+        `https://theatron-backend.vercel.app/api/movie/playnow?id_user=1`,
       );
       setMovies(response.data.data);
       const movieIds = response.data.data.map((movie) => movie.id);
@@ -88,7 +88,7 @@ const Main = () => {
     setLoading(true);
     try {
       const response = await axios.post(
-        `http://127.0.0.1:3000/api/watchlist/toggle`,
+        `https://theatron-backend.vercel.app/api/watchlist/toggle`,
         { id_movie },
         {
           headers: {

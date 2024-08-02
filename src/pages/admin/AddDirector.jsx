@@ -16,7 +16,7 @@ const AddDirector = () => {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:3000/api/admin/add-director",
+        "https://theatron-backend.vercel.app/api/admin/add-director",
         { name },
         {
           headers: {

@@ -17,7 +17,7 @@ const AddStar = () => {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:3000/api/admin/add-star",
+        "https://theatron-backend.vercel.app/api/admin/add-star",
         { name },
         {
           headers: {
@@ -27,7 +27,6 @@ const AddStar = () => {
       );
       console.log(response.data.message);
       setName("");
-
     } catch (error) {
       console.error("Error adding star:", error);
       setLoading(false); // Set loading to false if there's an error

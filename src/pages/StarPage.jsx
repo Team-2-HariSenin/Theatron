@@ -12,7 +12,7 @@ const Star = () => {
   const getMovieByStar = async () => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:3000/api/movie/star/${id}`,
+        `https://theatron-backend.vercel.app/api/movie/star/${id}`,
       );
       setStarData(response.data.data.movies);
       setStarName(response.data.data.name);

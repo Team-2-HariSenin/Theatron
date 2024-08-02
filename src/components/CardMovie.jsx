@@ -20,7 +20,7 @@ const CardMovie = ({ type, id_movie, src, title, rateAverage }) => {
   const getRating = async () => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:3000/api/rate?id_movie=${id_movie}`,
+        `https://theatron-backend.vercel.app/api/rate?id_movie=${id_movie}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -49,7 +49,7 @@ const CardMovie = ({ type, id_movie, src, title, rateAverage }) => {
     try {
       const getWatchListStatus = async () => {
         const response = await axios.get(
-          `http://127.0.0.1:3000/api/watchlist/${id_movie}`,
+          `https://theatron-backend.vercel.app/api/watchlist/${id_movie}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -69,7 +69,7 @@ const CardMovie = ({ type, id_movie, src, title, rateAverage }) => {
     setLoading(true);
     try {
       const response = await axios.post(
-        `http://127.0.0.1:3000/api/watchlist/toggle`,
+        `https://theatron-backend.vercel.app/api/watchlist/toggle`,
         { id_movie },
         {
           headers: {

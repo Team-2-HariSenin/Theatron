@@ -28,11 +28,14 @@ const Profile = () => {
 
   const getProfile = async () => {
     try {
-      const response = await axios.get("http://127.0.0.1:3000/api/user", {
-        headers: {
-          Authorization: `Bearer ${token}`,
+      const response = await axios.get(
+        "https://theatron-backend.vercel.app/api/user",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         },
-      });
+      );
       setProfileData({
         ...profileData,
         name: response.data.name,
@@ -75,7 +78,7 @@ const Profile = () => {
       }
 
       const response = await axios.put(
-        "http://127.0.0.1:3000/api/user",
+        "https://theatron-backend.vercel.app/api/user",
         updateData,
         {
           headers: {
